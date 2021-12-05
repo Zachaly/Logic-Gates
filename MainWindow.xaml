@@ -1,0 +1,45 @@
+﻿<Window x:Class="Symulator_układów_logicznych.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Symulator_układów_logicznych"
+        mc:Ignorable="d"
+        Title="Symulator układów logicznych">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Background="Gray" Grid.Row="0">
+            <MenuItem Padding="3px" Margin="5,0,5,0" Background="Gray">
+                <MenuItem.Header>
+                    <TextBlock HorizontalAlignment="Center">Create</TextBlock>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Options"/>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Exit"/>
+        </Menu>
+        
+        <Canvas Background="Transparent" Grid.Row="1" x:Name="WorkSpace" 
+                Drop="WorkSpace_Drop" AllowDrop="True" DragOver="WorkSpace_DragOver">
+            <local:GateContainer Canvas.Left="100" Canvas.Top="100"/>
+        </Canvas>
+
+        <Menu x:Name="ToolBox"  Background="Gray" Height="25" Grid.Row="2">
+            <MenuItem Width="40" Padding="3px" Margin="5,0,5,0" Background="Gray">
+                <MenuItem.Header>
+                    <TextBlock HorizontalAlignment="Center">AND</TextBlock>
+                </MenuItem.Header>
+            </MenuItem>
+
+            <MenuItem Width="40" Padding="3px" Margin="5,0,5,0" Background="Gray">
+                <MenuItem.Header>
+                    <TextBlock HorizontalAlignment="Center">NOT</TextBlock>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

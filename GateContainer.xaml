@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Symulator_układów_logicznych.GateContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Symulator_układów_logicznych"
+             mc:Ignorable="d" 
+             Width="100" Height="50" FontSize="20" >
+    <Label x:Name="ContentLabel" Background="Gray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+           MouseMove="Content_MouseMove" BorderBrush="Black" BorderThickness="1">
+            XD
+    </Label>
+</UserControl>
