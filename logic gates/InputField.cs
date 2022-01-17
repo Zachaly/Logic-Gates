@@ -2,7 +2,7 @@
 namespace Symulator_układów_logicznych
 {
     // field that is generating the logical sygnal
-    class InputField : LogicGate
+    public class InputField : LogicGate
     {
         bool logical_state = false; // current output of the field
         public override bool Output

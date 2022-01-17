@@ -14,32 +14,21 @@
         </Grid.RowDefinitions>
         
         <Menu Background="Gray" Grid.Row="0">
-            <MenuItem Padding="3px" Margin="5,0,5,0" Background="Gray">
-                <MenuItem.Header>
-                    <TextBlock HorizontalAlignment="Center">Create</TextBlock>
-                </MenuItem.Header>
-            </MenuItem>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Create"/>
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Options"/>
-            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Exit"/>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Exit" Click="Exit"/>
         </Menu>
-        
+
         <Canvas Background="Transparent" Grid.Row="1" x:Name="WorkSpace" 
-                Drop="WorkSpace_Drop" AllowDrop="True" DragOver="WorkSpace_DragOver">
-            <local:GateContainer Canvas.Left="100" Canvas.Top="100"/>
+                Drop="WorkSpace_Drop" DragOver="WorkSpace_DragOver" AllowDrop="True">
+            
+            <local:InputFieldContainer Canvas.Top="100" Canvas.Left="50"/>
+
+            <local:InputFieldContainer Canvas.Top="250" Canvas.Left="50"/>
+
+            <local:OutputFieldContainer Canvas.Top="250" Canvas.Right="50" x:Name="Output"/>
         </Canvas>
 
-        <Menu x:Name="ToolBox"  Background="Gray" Height="25" Grid.Row="2">
-            <MenuItem Width="40" Padding="3px" Margin="5,0,5,0" Background="Gray">
-                <MenuItem.Header>
-                    <TextBlock HorizontalAlignment="Center">AND</TextBlock>
-                </MenuItem.Header>
-            </MenuItem>
-
-            <MenuItem Width="40" Padding="3px" Margin="5,0,5,0" Background="Gray">
-                <MenuItem.Header>
-                    <TextBlock HorizontalAlignment="Center">NOT</TextBlock>
-                </MenuItem.Header>
-            </MenuItem>
-        </Menu>
+        <Menu x:Name="ToolBox"  Background="Gray" Height="25" Grid.Row="2"/>
     </Grid>
 </Window>

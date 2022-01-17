@@ -8,13 +8,15 @@ namespace Symulator_układów_logicznych
         {
             get
             {
-                // if the next element has different logic value, return false
-                for (int i = 0; i < Inputs.Count - 2; i++)
-                    if (Inputs[i].Output != Inputs[i + 1].Output)
+                if (Inputs.Count == 0 || Inputs.Count == 1)
+                    return false;
+
+                foreach (var inp in Inputs)
+                    if (!inp.Output)
                         return false;
 
                 return true;
-            } 
+            }
         }
         public ANDGate() : base("AND") { }
 

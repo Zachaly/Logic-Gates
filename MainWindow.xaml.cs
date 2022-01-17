@@ -1,56 +1,133 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Symulator_układów_logicznych
 {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    partial class MainWindow : Window
     {
+        public static UIElement DragElement; // element used in drag and drop
+        internal static GateSchema currentSchema; // elements currently in workspace
+        UserControl ConnectedGate; // element that connects to another in this moment
+
         public MainWindow()
         {
             InitializeComponent();
+            ToolBox.Items.Add(new ToolBoxItem(new ANDGate(), Colors.Green, WorkSpace));
+            ToolBox.Items.Add(new ToolBoxItem(new NOTGate(), Colors.Brown, WorkSpace));
+            currentSchema = new GateSchema(WorkSpace);
+
         }
 
+        // Drag and drop for elements in workspace
         private void WorkSpace_Drop(object sender, DragEventArgs e)
         {
-            object obj = e.Data.GetData(DataFormats.Serializable);
+            Point position = e.GetPosition(WorkSpace);
 
-            if (obj is UIElement)
-            {
-                Point position = e.GetPosition(WorkSpace);
+            Canvas.SetLeft(DragElement, position.X);
+            Canvas.SetTop(DragElement, position.Y);
 
-                Canvas.SetLeft((UIElement)obj, position.X);
-                Canvas.SetTop((UIElement)obj, position.Y);
-                WorkSpace.Children.Add((UIElement)obj);
-            }
         }
 
         private void WorkSpace_DragOver(object sender, DragEventArgs e)
         {
-            object obj = e.Data.GetData(DataFormats.Serializable);
+            Point position = e.GetPosition(WorkSpace);
 
-            if (obj is UIElement)
+            Canvas.SetLeft(DragElement, position.X);
+            Canvas.SetTop(DragElement, position.Y);
+        }
+
+        // Deletes element from workspace
+        public void DeleteContainer(GateContainer container)
+        {
+            WorkSpace.Children.Remove(container);
+
+            // Deleting all connections of the container
+            // Starts from end of the list
+            int i = container.Connections.Count - 1;
+
+            while (i >= 0)
             {
-                Point position = e.GetPosition(WorkSpace);
-
-                Canvas.SetLeft((UIElement)obj, position.X);
-                Canvas.SetTop((UIElement)obj, position.Y);
-                WorkSpace.Children.Add((UIElement)obj);
+                DeleteConnection(container.Connections[i]);
+                container.Connections[i].Delete();
+                i = container.Connections.Count - 1;
             }
+            currentSchema.UpdateSchema();
+        }
+
+        // Removes graphical connection
+        public void DeleteConnection(VisualConnection con)
+        {
+            WorkSpace.Children.Remove(con);
+        }
+
+        // Shuts down app
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+
+        // Connects 2 elements both graphically and logically
+        void CreateGateConnection(object sender, MouseEventArgs ea)
+        {
+            Point pt = ea.GetPosition((UIElement)sender);
+
+            var result = VisualTreeHelper.HitTest(WorkSpace, pt).VisualHit;
+
+            // Gets element just before canvas in tree, without that wrong element(e.g textbox) will be chosen
+            while (result != null && VisualTreeHelper.GetParent(result) as Canvas == null)
+                result = VisualTreeHelper.GetParent(result);
+
+            if (result is IWorkspaceItem)
+            {
+                IWorkspaceItem Gate = result as IWorkspaceItem;
+
+                // NOT gate can have only one input, same with output field
+
+                if (Gate is GateContainer)
+                    if ((Gate as GateContainer).Gate is NOTGate &&
+                        (Gate as GateContainer).Gate.GetInputs.Count > 0)
+                    {
+                        WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
+                        return;
+                    }
+
+                if (Gate is OutputFieldContainer)
+                    if ((Gate as OutputFieldContainer).Field.GetInputs.Count > 0)
+                    {
+                        WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
+                        return;
+                    }
+
+                // Input field cannot have input
+                if (Gate is InputFieldContainer)
+                {
+                    WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
+                    return;
+                }
+
+
+                (ConnectedGate as IWorkspaceItem).CreateConnection(Gate);
+
+                VisualConnection connection = new VisualConnection(ConnectedGate, Gate as UserControl);
+                (ConnectedGate as IWorkspaceItem).Connections.Add(connection);
+                Gate.Connections.Add(connection);
+                WorkSpace.Children.Add(connection);
+                currentSchema.UpdateSchema();
+            }
+
+            // When connection is set no more gates can be connected
+            WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
+        }
+
+        // Enables possibility to connect 2 gates with click
+        public void ConnectionEnable(UserControl gate)
+        {
+            ConnectedGate = gate;
+            WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
     }
 }

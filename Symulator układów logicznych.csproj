@@ -55,7 +55,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IWorkspaceItem.cs" />
+    <Compile Include="InputFieldContainer.xaml.cs">
+      <DependentUpon>InputFieldContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OutputFieldContainer.xaml.cs">
+      <DependentUpon>OutputFieldContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToolBoxItem.xaml.cs">
+      <DependentUpon>ToolBoxItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VisualConnection.xaml.cs">
+      <DependentUpon>VisualConnection.xaml</DependentUpon>
+    </Compile>
     <Page Include="GateContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputFieldContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,7 +87,7 @@
     <Compile Include="GateContainer.xaml.cs">
       <DependentUpon>GateContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GateSchema.cs" />
+    <Compile Include="logic gates\GateSchema.cs" />
     <Compile Include="logic gates\ANDGate.cs" />
     <Compile Include="logic gates\CustomGate.cs" />
     <Compile Include="logic gates\InputField.cs" />
@@ -81,6 +98,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OutputFieldContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VisualConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -108,5 +137,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

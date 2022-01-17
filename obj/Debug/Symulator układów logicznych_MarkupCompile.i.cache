@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\PROGRAMOWANIE\C#\projekty\Symulator układów logicznych\App.xaml
-2-814522293
+6-379706993
 
-14-1598688896
+191526429605
 13-1505183044
-GateContainer.xaml;MainWindow.xaml;
+GateContainer.xaml;InputFieldContainer.xaml;MainWindow.xaml;OutputFieldContainer.xaml;ToolBoxItem.xaml;VisualConnection.xaml;
 
 True
 

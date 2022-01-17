@@ -15,15 +15,13 @@ namespace Symulator_układów_logicznych
             }
         }
 
-        public NOTGate() : base("NOT")
-        {
-            Inputs.Add(null);
-        }
+        public NOTGate() : base("NOT") { }
 
         // NOT can have only one input, the function does not add to list, it replaces the element
         public override void ConnectWith(LogicGate gate)
         {
-            Inputs[0] = gate;
+            if (Inputs.Count < 1)
+                Inputs.Add(gate);
         }
     }
 }

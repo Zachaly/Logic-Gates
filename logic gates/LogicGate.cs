@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Symulator_układów_logicznych
 {
-    public abstract class LogicGate
+    public abstract class LogicGate : ICloneable
     {
         string _name = "";
         abstract public bool Output { get; } // an output signal of this logic gates
@@ -25,6 +26,26 @@ namespace Symulator_układów_logicznych
             Inputs.Remove(gate);
         }
 
+        // Clone differs on logic gate type
+        public object Clone()
+        {
+            if (this is ANDGate)
+                return new ANDGate();
+            else if (this is NOTGate)
+                return new NOTGate();
+            else if (this is InputField)
+                return new InputField();
+            else if (this is OutputField)
+                return new OutputField();
+            else if (this is CustomGate)
+            {
+                CustomGate gate = this as CustomGate;
+
+                return new CustomGate(Name, (GateSchema)gate.Schema.Clone());
+            }
+
+            return null;
+        }
     }
 
 }

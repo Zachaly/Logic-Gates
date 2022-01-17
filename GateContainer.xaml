@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Symulator_układów_logicznych"
              mc:Ignorable="d" 
-             Width="100" Height="50" FontSize="20" >
-    <Label x:Name="ContentLabel" Background="Gray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
-           MouseMove="Content_MouseMove" BorderBrush="Black" BorderThickness="1">
-            XD
+             Width="100" Height="50" FontSize="20" 
+             MouseMove="Content_MouseMove" 
+             BorderBrush="Black" BorderThickness="1"
+             Background="Gray">
+    <Label x:Name="ContentLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <Label.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Delete" Click="Delete_Click"/>
+                <MenuItem Header="Create Connection" Click="CreateVisualConnection_Click"/>
+            </ContextMenu>
+        </Label.ContextMenu>
     </Label>
 </UserControl>
