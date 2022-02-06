@@ -8,10 +8,18 @@ namespace Symulator_układów_logicznych
         {
             get
             {
-                if (Inputs[0] is null)
-                    return false;
 
-                return !Inputs[0].Output;
+                try
+                {
+                    if (Inputs[0] is null == false)
+                        return !Inputs[0].Output;
+                    else
+                        return false;
+                }
+                catch (System.ArgumentOutOfRangeException e)
+                {
+                    return false;
+                }
             }
         }
 

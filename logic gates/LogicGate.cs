@@ -33,10 +33,10 @@ namespace Symulator_układów_logicznych
                 return new ANDGate();
             else if (this is NOTGate)
                 return new NOTGate();
-            else if (this is InputField)
-                return new InputField();
-            else if (this is OutputField)
-                return new OutputField();
+            else if (this is InputField || this is OutputField)
+                return new Buffer();
+            else if (this is Buffer)
+                return new Buffer();
             else if (this is CustomGate)
             {
                 CustomGate gate = this as CustomGate;

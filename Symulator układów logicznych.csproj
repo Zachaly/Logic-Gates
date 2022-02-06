@@ -59,6 +59,7 @@
     <Compile Include="InputFieldContainer.xaml.cs">
       <DependentUpon>InputFieldContainer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="logic gates\Buffer.cs" />
     <Compile Include="OutputFieldContainer.xaml.cs">
       <DependentUpon>OutputFieldContainer.xaml</DependentUpon>
     </Compile>

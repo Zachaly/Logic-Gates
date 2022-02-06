@@ -10,7 +10,7 @@ namespace Symulator_układów_logicznych
             get { return logical_state; }
         }
 
-        public InputField() : base("") { }
+        public InputField() : base("Input Field") { }
 
         // Connect this to the target gate
         public override void ConnectWith(LogicGate gate)

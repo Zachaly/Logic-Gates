@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 
-
 namespace Symulator_układów_logicznych
 {
     // Class responsible to show connection between two gates in workspace
@@ -12,7 +11,7 @@ namespace Symulator_układów_logicznych
     {
         IWorkspaceItem Start; // Gate that start the connection
         IWorkspaceItem Target;
-        Point StartPoint;// Graphical point where connection start
+        Point StartPoint; // Graphical point where connection start
         Point EndPoint;
 
         // returns place on the list of connections

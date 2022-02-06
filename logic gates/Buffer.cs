@@ -1,10 +1,16 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Symulator_układów_logicznych
 {
-    // end of the logic gate layout, used as an output in custom logic gates
-    public class OutputField : LogicGate
+    // Used only in custom gates to replace input fields
+    class Buffer : LogicGate
     {
-        public override bool Output
+        // Buffer sends the same signal that it receives
+        public override bool Output 
         {
             get
             {
@@ -19,13 +25,16 @@ namespace Symulator_układów_logicznych
                 {
                     return false;
                 }
+                
             }
         }
 
+        public Buffer() : base("Buffer")
+        {
 
-        public OutputField() : base("Output Field") { }
+        }
 
-        // this field can have only one input, so it is not adding new gate, it replaces it
+        // Buffer can have only one input
         public override void ConnectWith(LogicGate gate)
         {
             if (Inputs.Count < 1)

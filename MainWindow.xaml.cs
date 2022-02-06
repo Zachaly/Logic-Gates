@@ -129,5 +129,34 @@ namespace Symulator_układów_logicznych
             ConnectedGate = gate;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
+
+        private void AddCustomGate(object sender, RoutedEventArgs e)
+        {
+            ToolBox.Items.Add(new ToolBoxItem(new CustomGate("XD", currentSchema), Colors.Blue, WorkSpace));
+            currentSchema = new GateSchema(WorkSpace);
+
+            SetStandartWorkspace();
+            currentSchema.UpdateSchema();
+        }
+
+        void SetStandartWorkspace()
+        {
+            WorkSpace.Children.Clear();
+
+            InputFieldContainer cont = new InputFieldContainer();
+            Canvas.SetTop(cont, 200);
+            Canvas.SetLeft(cont, 50);
+            WorkSpace.Children.Add(cont);
+
+            cont = new InputFieldContainer();
+            Canvas.SetTop(cont, 100);
+            Canvas.SetLeft(cont, 50);
+            WorkSpace.Children.Add(cont);
+
+            OutputFieldContainer output = new OutputFieldContainer();
+            Canvas.SetTop(output, 150);
+            Canvas.SetRight(output, 50);
+            WorkSpace.Children.Add(output);
+        }
     }
 }

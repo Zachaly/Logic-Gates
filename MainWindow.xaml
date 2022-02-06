@@ -17,6 +17,7 @@
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Create"/>
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Options"/>
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Exit" Click="Exit"/>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Add" Click="AddCustomGate"/>
         </Menu>
 
         <Canvas Background="Transparent" Grid.Row="1" x:Name="WorkSpace" 
