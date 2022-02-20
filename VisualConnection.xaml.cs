@@ -99,7 +99,7 @@ namespace Symulator_układów_logicznych
                 Start.DeleteConnection(Target);
                 (App.Current.MainWindow as MainWindow).DeleteConnection(this);
             }
-            catch (System.NullReferenceException e) { }
+            catch (System.NullReferenceException _) { }
         }
 
         private void Click(object sender, RoutedEventArgs e)

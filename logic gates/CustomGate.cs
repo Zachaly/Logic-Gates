@@ -26,14 +26,12 @@ namespace Symulator_układów_logicznych
         // connects given gate with this one's output
         public override void ConnectWith(LogicGate gate)
         {
-
             foreach(var buff in Inputs)
                 if(buff.GetInputs.Count == 0)
                 {
                     buff.ConnectWith(gate);
                     break;
                 }
-            
         }
 
         // updates info basing on given schema
@@ -42,8 +40,6 @@ namespace Symulator_układów_logicznych
             _schema = schema;
             OutputGate = schema.Output;
             Inputs = schema.Inputs;
-            
         }
     }
-
 }

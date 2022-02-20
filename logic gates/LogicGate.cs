@@ -3,7 +3,7 @@ using System;
 
 namespace Symulator_układów_logicznych
 {
-    public abstract class LogicGate : ICloneable
+    public abstract class LogicGate
     {
         string _name = "";
         abstract public bool Output { get; } // an output signal of this logic gates
@@ -27,7 +27,7 @@ namespace Symulator_układów_logicznych
         }
 
         // Clone differs on logic gate type
-        public object Clone()
+        public LogicGate Clone()
         {
             if (this is ANDGate)
                 return new ANDGate();
@@ -41,11 +41,10 @@ namespace Symulator_układów_logicznych
             {
                 CustomGate gate = this as CustomGate;
 
-                return new CustomGate(Name, (GateSchema)gate.Schema.Clone());
+                return new CustomGate(Name, gate.Schema.Clone());
             }
 
             return null;
         }
     }
-
 }

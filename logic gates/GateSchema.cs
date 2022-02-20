@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Symulator_układów_logicznych
 {
-    class GateSchema : ICloneable
+    class GateSchema
     {
         public List<LogicGate> Gates { get; set; }
         public List<LogicGate> Inputs { get; set; }
@@ -36,7 +36,6 @@ namespace Symulator_układów_logicznych
                       where el is InputFieldContainer
                       select (el as InputFieldContainer).Field as LogicGate).ToList();
 
-
             try
             {
                 OutputContainer = (from UserControl el in Container.Children
@@ -47,7 +46,7 @@ namespace Symulator_układów_logicznych
 
                 Output = OutputContainer.Field;
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException _)
             {
                 Output = new OutputField();
             }
@@ -59,42 +58,19 @@ namespace Symulator_układów_logicznych
             foreach (var gate in Gates)
                 foreach (var input in gate.GetInputs)
                     Connections.Add(new Connection(input, gate));
-
-            
         }
 
-        public object Clone()
+        public GateSchema Clone()
         {
             List<LogicGate> newGates = new List<LogicGate>();
             List<LogicGate> newInputs = new List<LogicGate>();
             List<Connection> newConnections = new List<Connection>();
-            LogicGate newOutput = new Buffer();
+            LogicGate newOutput = null;
 
-            foreach (var el in Connections)
-            {
-                newConnections.Add((Connection)el.Clone());
-            }
+            CopyWithInputs(Output, newGates, newConnections);
 
-
-            foreach (var el in newConnections)
-            {
-                el.InputGate.ConnectWith(el.OutputGate);
-
-                if (newGates.Contains(el.OutputGate))
-                {
-                    continue;
-                }
-                
-                newGates.Add(el.OutputGate);
-
-                if(el.InputGate is Buffer) 
-                {
-                    newOutput = el.InputGate;
-                }
-
-                if (el.OutputGate is Buffer)
-                    newInputs.Add(el.OutputGate);
-            }
+            newOutput = (from el in newConnections where el.InputGate is Buffer select el.InputGate).FirstOrDefault();
+            newInputs.AddRange(from el in newConnections where el.OutputGate is Buffer select el.OutputGate);
 
             GateSchema gateSchema = new GateSchema()
             {
@@ -104,55 +80,34 @@ namespace Symulator_układów_logicznych
                 Container = this.Container,
                 Inputs = newInputs
             };
-            gateSchema.Test();
 
             return gateSchema;
-
-
         }
 
-        void Test()
+        void CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, bool present = false, LogicGate inputCopy = null)
         {
-            string str = "";
-            foreach (var gate in Gates)
-                str += $"{gate.Name}({gate.Output})\n";
-
-            MessageBox.Show(str, "Outputs");
-
-            if (Connections is null)
-                return;
-
-            str = "";
-            foreach (var gate in Connections)
-                str += $"{gate.OutputGate.Name}-{gate.InputGate.Name}\n ";
-
-            MessageBox.Show(str, "Connections");
-
-            str = "";
-            foreach (var gate in Gates)
+            var nGate = inputCopy;
+            if (!present)
             {
-                str += gate.Name + " has: ";
-                foreach (var el in gate.GetInputs)
-                    str += $"{el.Name}, ";
-                str += "\n";
+                nGate = gate.Clone();
+                gates.Add(nGate);
             }
 
-
-            MessageBox.Show(str, "inputs");
-
-            str = "";
-            foreach (var gate in Inputs)
+            foreach(var input in gate.GetInputs)
             {
-                str += gate.Name + " ";
+                var nInput = input.Clone();
+
+                gates.Add(nInput);
+                nGate.ConnectWith(nInput);
+                connections.Add(new Connection(nInput, nGate));
+
+                CopyWithInputs(input, gates, connections, true, nInput);
             }
-
-
-            MessageBox.Show(str, "inputs");
         }
     }
 
     // struct made to organize connections between two logic gates
-    struct Connection : ICloneable
+    struct Connection
     {
         public LogicGate InputGate; // gate receiving the signal
         public LogicGate OutputGate; // gate giving a signal
@@ -161,16 +116,6 @@ namespace Symulator_układów_logicznych
         {
             OutputGate = output;
             InputGate = input;
-        }
-
-        public object Clone()
-        {
-           
-            Connection con = new Connection((LogicGate)OutputGate.Clone(), (LogicGate)InputGate.Clone());
-
-            con.InputGate.ConnectWith(con.OutputGate);
-
-            return con;
         }
     }
 }

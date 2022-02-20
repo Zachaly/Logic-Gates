@@ -23,7 +23,7 @@ namespace Symulator_układów_logicznych
         // Creates the type of logic gate that the button represents in the middle of workspace
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            GateContainer gateContainer = new GateContainer(Gate.Clone() as LogicGate, Color);
+            GateContainer gateContainer = new GateContainer(Gate.Clone(), Color);
             Canvas.SetLeft(gateContainer, WorkSpace.ActualWidth / 2 - this.ActualWidth);
             Canvas.SetTop(gateContainer, WorkSpace.ActualHeight / 2 - this.ActualHeight);
             WorkSpace.Children.Add(gateContainer);

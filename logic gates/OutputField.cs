@@ -15,7 +15,7 @@ namespace Symulator_układów_logicznych
                     else
                         return false;
                 }
-                catch (System.ArgumentOutOfRangeException e)
+                catch (System.ArgumentOutOfRangeException _)
                 {
                     return false;
                 }
