@@ -129,9 +129,6 @@ namespace Symulator_układów_logicznych
                     schema.Inputs[i].Outputs.CopyTo(outputs);
                     for (int j = 0; j < outputs.Length; j++)
                     {
-                        if (outputs[j] is Buffer)
-                            if (outputs[j] as Buffer != null)
-                                outputs[j] = (outputs[j] as Buffer).Holder;
                         outputs[j].Disconnect(schema.Inputs[i]);
                     }
                 }
@@ -170,6 +167,7 @@ namespace Symulator_układów_logicznych
                     input.Connections.Add(VisualConnection);
                     outputGate.Connections.Add(VisualConnection);
                     Container.Children.Add(VisualConnection);
+                    VisualConnection.Update();
                 }
             }
         }
@@ -199,8 +197,8 @@ namespace Symulator_układów_logicznych
             foreach(var input in startGate.GetInputs)
             {
                 LogicGate newInput = input;
-                if (input is Buffer)
-                    newInput = (input as Buffer).Holder;
+                //if (input is Buffer)
+                //    newInput = (input as Buffer).Holder;
 
                 await AddGateContainers(newInput, false, x + 150, y + currentInput * 150);
                 currentInput += 1;

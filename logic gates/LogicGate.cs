@@ -42,7 +42,7 @@ namespace Symulator_układów_logicznych
             else if (this is InputField || this is OutputField)
                 return new Buffer();
             else if (this is Buffer)
-                return new Buffer();
+                return new Buffer() { Holder = (this as Buffer).Holder};
             else if (this is CustomGate)
             {
                 CustomGate gate = this as CustomGate;
