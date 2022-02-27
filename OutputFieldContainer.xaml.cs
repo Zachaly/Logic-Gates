@@ -9,7 +9,12 @@ namespace Symulator_układów_logicznych
     // Output of the whole sheme
     public partial class OutputFieldContainer : UserControl, IWorkspaceItem
     {
-        public OutputField Field { get; }
+        public LogicGate Gate 
+        { 
+            get => Field; 
+            set => Field = value; 
+        }
+        public LogicGate Field { get; set; }
         public List<VisualConnection> Connections { get; set; }
 
         public OutputFieldContainer()

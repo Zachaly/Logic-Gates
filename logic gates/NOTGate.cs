@@ -28,8 +28,11 @@ namespace Symulator_układów_logicznych
         // NOT can have only one input, the function does not add to list, it replaces the element
         public override void ConnectWith(LogicGate gate)
         {
-            if (Inputs.Count < 1)
-                Inputs.Add(gate);
+            if (Inputs.Count > 0)
+                return;
+
+            base.ConnectWith(gate);
+            Inputs.Add(gate);
         }
     }
 }

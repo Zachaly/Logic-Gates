@@ -3,10 +3,11 @@ using System.Linq;
 using System.Windows.Controls;
 using System;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace Symulator_układów_logicznych
 {
-    class GateSchema
+    public class GateSchema
     {
         public List<LogicGate> Gates { get; set; }
         public List<LogicGate> Inputs { get; set; }
@@ -60,14 +61,14 @@ namespace Symulator_układów_logicznych
                     Connections.Add(new Connection(input, gate));
         }
 
-        public GateSchema Clone()
+        public async Task<GateSchema> Clone()
         {
             List<LogicGate> newGates = new List<LogicGate>();
             List<LogicGate> newInputs = new List<LogicGate>();
             List<Connection> newConnections = new List<Connection>();
             LogicGate newOutput = null;
 
-            CopyWithInputs(Output, newGates, newConnections);
+            await CopyWithInputs(Output, newGates, newConnections);
 
             newOutput = (from el in newConnections where el.InputGate is Buffer select el.InputGate).FirstOrDefault();
             newInputs.AddRange(from el in newConnections where el.OutputGate is Buffer select el.OutputGate);
@@ -84,7 +85,8 @@ namespace Symulator_układów_logicznych
             return gateSchema;
         }
 
-        void CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, bool present = false, LogicGate inputCopy = null)
+        // Copies given gate with its inputs and so on, adds them to the list
+        async Task CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, bool present = false, LogicGate inputCopy = null)
         {
             var nGate = inputCopy;
             if (!present)
@@ -96,18 +98,143 @@ namespace Symulator_układów_logicznych
             foreach(var input in gate.GetInputs)
             {
                 var nInput = input.Clone();
+                if (nInput is Buffer)
+                    gates.Add((nInput as Buffer).Holder);
+                else
+                    gates.Add(nInput);
 
-                gates.Add(nInput);
                 nGate.ConnectWith(nInput);
                 connections.Add(new Connection(nInput, nGate));
 
                 CopyWithInputs(input, gates, connections, true, nInput);
             }
         }
+
+        // fills workspace with given schema
+        public async void FillWorkspaceWithSchema()
+        {
+            var schema = await Clone();
+            Container.Children.Clear();
+
+            var gates = from el in schema.Gates where !(el is Buffer) select el;
+            int positionY = 50;
+            int positionX = 50;
+            InputFieldContainer newInput = null;
+
+            for(int i = 0; i < schema.Inputs.Count; i++)
+            {
+                LogicGate[] outputs = new LogicGate[schema.Inputs[i].Outputs.Count];
+                try
+                {
+                    schema.Inputs[i].Outputs.CopyTo(outputs);
+                    for (int j = 0; j < outputs.Length; j++)
+                    {
+                        if (outputs[j] is Buffer)
+                            if (outputs[j] as Buffer != null)
+                                outputs[j] = (outputs[j] as Buffer).Holder;
+                        outputs[j].Disconnect(schema.Inputs[i]);
+                    }
+                }
+                catch(NullReferenceException _) { continue; }
+                schema.Inputs[i] = new InputField();
+                newInput = new InputFieldContainer();
+                newInput.Field = schema.Inputs[i];
+
+                foreach (var conn in outputs)
+                    conn.ConnectWith(newInput.Field);
+
+                Canvas.SetTop(newInput, positionY);
+                Canvas.SetLeft(newInput, positionX);
+                Container.Children.Add(newInput);
+                positionY += 100;
+            }
+
+            OutputFieldContainer output = new OutputFieldContainer();
+            output.Field = schema.Output;
+            Canvas.SetTop(output, 150);
+            Canvas.SetRight(output, 50);
+            Container.Children.Add(output);
+
+            await AddGateContainers(schema.Output, true);
+            AddGateConnections(schema);
+
+            var inputField = (from UIElement el in Container.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
+            var items = (from UIElement el in Container.Children where el is IWorkspaceItem select el as IWorkspaceItem).ToList();
+
+            foreach(var input in inputField)
+            {
+                var outputs = (from el in items where input.Gate.Outputs.Contains(el.Gate) select el).ToList();
+                foreach(var outputGate in outputs)
+                {
+                    VisualConnection VisualConnection = new VisualConnection(input, outputGate as UserControl);
+                    input.Connections.Add(VisualConnection);
+                    outputGate.Connections.Add(VisualConnection);
+                    Container.Children.Add(VisualConnection);
+                }
+            }
+        }
+
+        // Adds gate containers to Workspace
+        async Task AddGateContainers(LogicGate startGate, bool isStart, int x = 100, int y = 150 )
+        {
+            if (startGate is null)
+                return;
+
+            if (!isStart)
+            {
+                try
+                {
+                    GateContainer container = new GateContainer(startGate, GateContainer.GateColours[startGate.Name]);
+                    Canvas.SetTop(container, y);
+                    Canvas.SetRight(container, x);
+                    Container.Children.Add(container);
+                }
+                catch(KeyNotFoundException _)
+                {
+                    return;
+                }  
+            }
+
+            int currentInput = 0;
+            foreach(var input in startGate.GetInputs)
+            {
+                LogicGate newInput = input;
+                if (input is Buffer)
+                    newInput = (input as Buffer).Holder;
+
+                await AddGateContainers(newInput, false, x + 150, y + currentInput * 150);
+                currentInput += 1;
+            }
+        }
+
+        // Adds visual connections to workspace
+        void AddGateConnections(GateSchema schema)
+        {
+            foreach(var connection in schema.Connections)
+            {
+                var items = from UIElement el in Container.Children where el is IWorkspaceItem select el as IWorkspaceItem;
+                try
+                {
+                    var input = (from IWorkspaceItem el in items where el.Gate == connection.OutputGate select el).First();
+                    var output = (from IWorkspaceItem el in items where el.Gate == connection.InputGate select el).First();
+
+                    VisualConnection VisualConnection = new VisualConnection(input as UserControl, output as UserControl);
+                    input.Connections.Add(VisualConnection);
+                    output.Connections.Add(VisualConnection);
+                    Container.Children.Add(VisualConnection);
+                }
+                catch(InvalidOperationException _)
+                {
+                    continue;
+                }
+            }
+
+
+        }
     }
 
     // struct made to organize connections between two logic gates
-    struct Connection
+    public struct Connection
     {
         public LogicGate InputGate; // gate receiving the signal
         public LogicGate OutputGate; // gate giving a signal

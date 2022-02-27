@@ -5,6 +5,7 @@ namespace Symulator_układów_logicznych
 {
     public interface IWorkspaceItem
     {
+        LogicGate Gate { get; set; }
         List<VisualConnection> Connections { get; set; } // Holds visual connections of this element
 
         // Creates,deletes logical connection between 2 elements

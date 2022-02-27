@@ -9,6 +9,8 @@ namespace Symulator_układów_logicznych
     // Used only in custom gates to replace input fields
     class Buffer : LogicGate
     {
+        public CustomGate Holder { get; set; }
+
         // Buffer sends the same signal that it receives
         public override bool Output 
         {
@@ -37,8 +39,11 @@ namespace Symulator_układów_logicznych
         // Buffer can have only one input
         public override void ConnectWith(LogicGate gate)
         {
-            if (Inputs.Count < 1)
-                Inputs.Add(gate);
+            if (Inputs.Count > 0)
+                return;
+
+            base.ConnectWith(this);
+            Inputs.Add(gate);
         }
     }
 }

@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\logic gates"
   ],
-  "SelectedNode": "\\Symulator układów logicznych.sln",
+  "SelectedNode": "\\logic gates\\LogicGate.cs",
   "PreviewInSolutionExplorer": false
 }

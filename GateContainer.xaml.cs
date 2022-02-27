@@ -9,9 +9,10 @@ namespace Symulator_układów_logicznych
     // class for a graphical field containg the logic gate 
     partial class GateContainer : UserControl, IWorkspaceItem
     {
-        public LogicGate Gate;
+        public LogicGate Gate { get; set; }
         public List<VisualConnection> Connections { get; set; }
 
+        public static Dictionary<string, Color> GateColours { get; } = new Dictionary<string, Color>();
         public GateContainer() : base()
         {
             InitializeComponent();

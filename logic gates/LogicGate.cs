@@ -10,20 +10,26 @@ namespace Symulator_układów_logicznych
         protected List<LogicGate> Inputs; // gates connected with this one
         public List<LogicGate> GetInputs { get { return Inputs; } } // returns inputs
         public string Name { get { return _name; } } // returns friendly name of this logic gate
+        public List<LogicGate> Outputs { get; }
 
         public LogicGate(string name)
         {
             Inputs = new List<LogicGate>();
+            Outputs = new List<LogicGate>();
             _name = name;
         }
 
         // adds given gate to inputs of this one
-        abstract public void ConnectWith(LogicGate gate);
+        virtual public void ConnectWith(LogicGate gate)
+        {
+            gate.Outputs.Add(this);
+        }
 
         // removes gate from inputs
         public void Disconnect(LogicGate gate)
         {
             Inputs.Remove(gate);
+            gate.Outputs.Remove(this);
         }
 
         // Clone differs on logic gate type
@@ -41,7 +47,7 @@ namespace Symulator_układów_logicznych
             {
                 CustomGate gate = this as CustomGate;
 
-                return new CustomGate(Name, gate.Schema.Clone());
+                return new CustomGate(Name, gate.Schema.Clone().Result);
             }
 
             return null;

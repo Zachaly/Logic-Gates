@@ -28,8 +28,11 @@ namespace Symulator_układów_logicznych
         // this field can have only one input, so it is not adding new gate, it replaces it
         public override void ConnectWith(LogicGate gate)
         {
-            if (Inputs.Count < 1)
-                Inputs.Add(gate);
+            if (Inputs.Count > 0)
+                return;
+
+            base.ConnectWith(gate);
+            Inputs.Add(gate);
         }
     }
 }

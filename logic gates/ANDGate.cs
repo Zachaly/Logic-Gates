@@ -22,6 +22,7 @@ namespace Symulator_układów_logicznych
 
         public override void ConnectWith(LogicGate gate)
         {
+            base.ConnectWith(gate);
             Inputs.Add(gate);
         }
     }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Symulator_układów_logicznych"
              mc:Ignorable="d" >
-    <Label Background="Gray" Width="50" Height="25" x:Name="Label" MouseDown="Label_MouseDown" 
+    <Label Background="Gray" MinWidth="50" Height="25" x:Name="Label" MouseDown="Label_MouseDown" 
            HorizontalContentAlignment="Center" VerticalAlignment="Center">
         
     </Label>

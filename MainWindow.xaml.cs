@@ -2,14 +2,15 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Linq;
 
 
 namespace Symulator_układów_logicznych
 {
     partial class MainWindow : Window
     {
-        public static UIElement DragElement; // element used in drag and drop
-        internal static GateSchema currentSchema; // elements currently in workspace
+        public static UIElement DragElement { get; set; } // element used in drag and drop
+        internal static GateSchema CurrentSchema { get; set; } // elements currently in workspace
         UserControl ConnectedGate; // element that connects to another in this moment
 
         public MainWindow()
@@ -17,7 +18,7 @@ namespace Symulator_układów_logicznych
             InitializeComponent();
             ToolBox.Items.Add(new ToolBoxItem(new ANDGate(), Colors.Green, WorkSpace));
             ToolBox.Items.Add(new ToolBoxItem(new NOTGate(), Colors.Brown, WorkSpace));
-            currentSchema = new GateSchema(WorkSpace);
+            CurrentSchema = new GateSchema(WorkSpace);
 
         }
 
@@ -54,7 +55,7 @@ namespace Symulator_układów_logicznych
                 container.Connections[i].Delete();
                 i = container.Connections.Count - 1;
             }
-            currentSchema.UpdateSchema();
+            CurrentSchema.UpdateSchema();
         }
 
         // Removes graphical connection
@@ -116,7 +117,7 @@ namespace Symulator_układów_logicznych
                 (ConnectedGate as IWorkspaceItem).Connections.Add(connection);
                 Gate.Connections.Add(connection);
                 WorkSpace.Children.Add(connection);
-                currentSchema.UpdateSchema();
+                CurrentSchema.UpdateSchema();
             }
 
             // When connection is set no more gates can be connected
@@ -127,16 +128,17 @@ namespace Symulator_układów_logicznych
         public void ConnectionEnable(UserControl gate)
         {
             ConnectedGate = gate;
+            WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
 
         private void AddCustomGate(object sender, RoutedEventArgs e)
         {
-            ToolBox.Items.Add(new ToolBoxItem(new CustomGate("XD", currentSchema), Colors.Blue, WorkSpace));
-            currentSchema = new GateSchema(WorkSpace);
+            ToolBox.Items.Add(new ToolBoxItem(new CustomGate("XD", CurrentSchema), Colors.Blue, WorkSpace));
+            CurrentSchema = new GateSchema(WorkSpace);
 
             SetStandartWorkspace();
-            currentSchema.UpdateSchema();
+            CurrentSchema.UpdateSchema();
         }
 
         void SetStandartWorkspace()
@@ -157,6 +159,17 @@ namespace Symulator_układów_logicznych
             Canvas.SetTop(output, 150);
             Canvas.SetRight(output, 50);
             WorkSpace.Children.Add(output);
+        }
+
+        public void FillWorkspaceWithSchema(GateSchema schema)
+        {
+            schema.FillWorkspaceWithSchema();
+            CurrentSchema.UpdateSchema();
+            var containers = from UIElement el in WorkSpace.Children where el is GateContainer select el as GateContainer;
+
+            foreach (var container in containers)
+                foreach (var connection in container.Connections)
+                    connection.Update();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Symulator_układów_logicznych
 {
@@ -29,6 +30,7 @@ namespace Symulator_układów_logicznych
             foreach(var buff in Inputs)
                 if(buff.GetInputs.Count == 0)
                 {
+                    base.ConnectWith(gate);
                     buff.ConnectWith(gate);
                     break;
                 }
@@ -40,6 +42,10 @@ namespace Symulator_układów_logicznych
             _schema = schema;
             OutputGate = schema.Output;
             Inputs = schema.Inputs;
+
+            foreach (var buff in Inputs)
+                if(buff is Buffer)
+                    (buff as Buffer).Holder = this;
         }
     }
 }
