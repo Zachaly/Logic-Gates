@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\
+C:\Users\igor0\OneDrive\Dokumenty\GitHub\Logic-Gates\obj\Debug\
 Symulator_układów_logicznych
 none
 false
 DEBUG;TRACE
-D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\App.xaml
-6-379706993
+C:\Users\igor0\OneDrive\Dokumenty\GitHub\Logic-Gates\App.xaml
+7-1652278367
 
-201699239076
-13-1505183044
-GateContainer.xaml;InputFieldContainer.xaml;MainWindow.xaml;OutputFieldContainer.xaml;ToolBoxItem.xaml;VisualConnection.xaml;
+22889147917
+54-895755590
+AddCustomGate.xaml;GateContainer.xaml;InputFieldContainer.xaml;MainWindow.xaml;OutputFieldContainer.xaml;ToolBoxItem.xaml;VisualConnection.xaml;
 
 True
 

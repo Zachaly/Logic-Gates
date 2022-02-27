@@ -12,8 +12,8 @@
     <Label x:Name="ContentLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
         <Label.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Delete" Click="Delete_Click"/>
                 <MenuItem Header="Create Connection" Click="CreateVisualConnection_Click"/>
+                <MenuItem Header="Delete" Click="Delete_Click"/>
             </ContextMenu>
         </Label.ContextMenu>
     </Label>

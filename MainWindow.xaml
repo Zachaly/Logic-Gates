@@ -5,31 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Symulator_układów_logicznych"
         mc:Ignorable="d"
-        Title="Symulator układów logicznych">
+        Title="Symulator układów logicznych" d:DesignHeight="698.518" d:DesignWidth="1250.883">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        
-        <Menu Background="Gray" Grid.Row="0">
-            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Create"/>
-            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Options"/>
+
+        <Menu Background="Gray" Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="New"/>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Numer of Inputs">
+                <MenuItem Padding="3px" Header="2 inputs" Click="numberOfGates2"/>
+                <MenuItem Padding="3px" Header="4 inputs" Click="numberOfGates4"/>
+                <MenuItem Padding="3px" Header="8 inputs" Click="numberOfGates8"/>
+            </MenuItem>
+            <MenuItem Padding="3px" Header="Add" Click="AddCustomGate"/>
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Exit" Click="Exit"/>
-            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Add" Click="AddCustomGate"/>
         </Menu>
 
         <Canvas Background="Transparent" Grid.Row="1" x:Name="WorkSpace" 
-                Drop="WorkSpace_Drop" DragOver="WorkSpace_DragOver" AllowDrop="True">
-            
-            <local:InputFieldContainer Canvas.Top="100" Canvas.Left="50"/>
+                Drop="WorkSpace_Drop" DragOver="WorkSpace_DragOver" AllowDrop="True" Grid.ColumnSpan="3" Margin="0,0,0,25" Grid.RowSpan="2">
 
-            <local:InputFieldContainer Canvas.Top="250" Canvas.Left="50"/>
+            <local:InputFieldContainer Canvas.Top="10" Canvas.Left="50"/>
+
+            <local:InputFieldContainer Canvas.Top="80" Canvas.Left="50"/>
 
             <local:OutputFieldContainer Canvas.Top="250" Canvas.Right="50" x:Name="Output"/>
         </Canvas>
 
-        <Menu x:Name="ToolBox"  Background="Gray" Height="25" Grid.Row="2"/>
+        <Menu x:Name="ToolBox"  Background="Gray" Grid.Row="2" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

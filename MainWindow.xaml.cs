@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Symulator_układów_logicznych
 {
@@ -18,7 +19,6 @@ namespace Symulator_układów_logicznych
             ToolBox.Items.Add(new ToolBoxItem(new ANDGate(), Colors.Green, WorkSpace));
             ToolBox.Items.Add(new ToolBoxItem(new NOTGate(), Colors.Brown, WorkSpace));
             currentSchema = new GateSchema(WorkSpace);
-
         }
 
         // Drag and drop for elements in workspace
@@ -129,14 +129,21 @@ namespace Symulator_układów_logicznych
             ConnectedGate = gate;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
-
-        private void AddCustomGate(object sender, RoutedEventArgs e)
+        public string customGateName = "";
+        public Color customGateColor = new Color();
+        public bool customGateSet = false;
+        public void AddCustomGate(object sender, RoutedEventArgs e)
         {
-            ToolBox.Items.Add(new ToolBoxItem(new CustomGate("XD", currentSchema), Colors.Blue, WorkSpace));
-            currentSchema = new GateSchema(WorkSpace);
-
-            SetStandartWorkspace();
-            currentSchema.UpdateSchema();
+            AddCustomGate newWindow = new AddCustomGate(customGateName);
+            newWindow.ShowDialog();
+            if (customGateSet)
+            {
+                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, currentSchema), customGateColor, WorkSpace));
+                currentSchema = new GateSchema(WorkSpace);
+                SetStandartWorkspace();
+                currentSchema.UpdateSchema();
+            }
+            customGateSet = false;
         }
 
         void SetStandartWorkspace()
@@ -158,5 +165,58 @@ namespace Symulator_układów_logicznych
             Canvas.SetRight(output, 50);
             WorkSpace.Children.Add(output);
         }
+
+        List<InputFieldContainer> getInputs()
+        {
+            return (from UIElement el in WorkSpace.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
+        }
+        void delInputs(List<InputFieldContainer> inputs)
+        {
+            foreach (InputFieldContainer el in inputs)
+            {
+                WorkSpace.Children.Remove(el);
+            }
+        }
+
+        void createInput(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                InputFieldContainer cont = new InputFieldContainer();
+                Canvas.SetTop(cont, 10 + i * 70);
+                Canvas.SetLeft(cont, 50);
+                WorkSpace.Children.Add(cont);
+            }
+        }
+
+        void numberOfGates2(object sender, RoutedEventArgs e)
+        {
+            List<InputFieldContainer> cont = new List<InputFieldContainer>();
+
+            List<InputFieldContainer> inputList = getInputs();
+            delInputs(inputList);
+
+            createInput(2);
+        }
+        void numberOfGates4(object sender, RoutedEventArgs e)
+        {
+            List<InputFieldContainer> cont = new List<InputFieldContainer>();
+
+            List<InputFieldContainer> inputList = getInputs();
+            delInputs(inputList);
+
+            createInput(4);
+        }
+        void numberOfGates8(object sender, RoutedEventArgs e)
+        {
+            List<InputFieldContainer> cont = new List<InputFieldContainer>();
+
+            List<InputFieldContainer> inputList = getInputs();
+            delInputs(inputList);
+
+            createInput(8);
+        }
     }
 }
+
+            
