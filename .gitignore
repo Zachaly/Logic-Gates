@@ -10,3 +10,40 @@ bin/Debug/Symulator układów logicznych.pdb
 .vs/slnx.sqlite
 .vs/slnx.sqlite
 .vs/slnx.sqlite
+.vs/slnx.sqlite-journal
+obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+obj/Debug/App.g.cs
+obj/Debug/App.g.i.cs
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+obj/Debug/GateContainer.g.i.cs
+obj/Debug/GeneratedInternalTypeHelper.g.cs
+obj/Debug/GeneratedInternalTypeHelper.g.i.cs
+obj/Debug/InputFieldContainer.g.cs
+obj/Debug/InputFieldContainer.g.i.cs
+obj/Debug/MainWindow.g.i.cs
+obj/Debug/OutputFieldContainer.g.cs
+obj/Debug/OutputFieldContainer.g.i.cs
+obj/Debug/Symulator układów logicznych_MarkupCompile.i.cache
+obj/Debug/Symulator układów logicznych_MarkupCompile.i.lref
+obj/Debug/ToolBoxItem.g.cs
+obj/Debug/ToolBoxItem.g.i.cs
+obj/Debug/VisualConnection.g.cs
+obj/Debug/VisualConnection.g.i.cs
+obj/Release/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
+obj/Release/AddCustomGate.g.cs
+obj/Release/App.g.cs
+obj/Release/GateContainer.g.cs
+obj/Release/GeneratedInternalTypeHelper.g.cs
+obj/Release/InputFieldContainer.g.cs
+obj/Release/MainWindow.g.cs
+obj/Release/OutputFieldContainer.g.cs
+obj/Release/Symulator układów logicznych_MarkupCompile.cache
+obj/Release/Symulator układów logicznych_MarkupCompile.lref
+obj/Release/ToolBoxItem.g.cs
+obj/Release/VisualConnection.g.cs
+*.cache
+*.baml
+*.lref
+*.resources
+obj/Debug/Symulator układów logicznych.csproj.FileListAbsolute.txt
+*.config

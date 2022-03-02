@@ -19,7 +19,6 @@ namespace Symulator_układów_logicznych
             ToolBox.Items.Add(new ToolBoxItem(new ANDGate(), Colors.Green, WorkSpace));
             ToolBox.Items.Add(new ToolBoxItem(new NOTGate(), Colors.Brown, WorkSpace));
             CurrentSchema = new GateSchema(WorkSpace);
-
         }
 
         // Drag and drop for elements in workspace
@@ -29,7 +28,6 @@ namespace Symulator_układów_logicznych
 
             Canvas.SetLeft(DragElement, position.X);
             Canvas.SetTop(DragElement, position.Y);
-
         }
 
         private void WorkSpace_DragOver(object sender, DragEventArgs e)
@@ -166,10 +164,6 @@ namespace Symulator_układów_logicznych
             schema.FillWorkspaceWithSchema();
             CurrentSchema.UpdateSchema();
             var containers = from UIElement el in WorkSpace.Children where el is GateContainer select el as GateContainer;
-
-            foreach (var container in containers)
-                foreach (var connection in container.Connections)
-                    connection.Update();
         }
     }
 }

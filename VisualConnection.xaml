@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Symulator_układów_logicznych"
              mc:Ignorable="d">
 
-    <Path x:Name="Line" StrokeThickness="2" Stroke="Black">
+    <Path x:Name="Line" StrokeThickness="3" Stroke="Black">
         <Path.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Remove Connection" Click="Click"/>

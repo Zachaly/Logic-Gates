@@ -17,6 +17,7 @@ namespace Symulator_układów_logicznych
         OutputFieldContainer OutputContainer;
 
         public List<Connection> Connections { get; set; }
+        int numberOfInputs { get => Inputs.Count; }
 
         Canvas Container;
         public GateSchema(Canvas canv)
@@ -68,10 +69,10 @@ namespace Symulator_układów_logicznych
             List<Connection> newConnections = new List<Connection>();
             LogicGate newOutput = null;
 
-            await CopyWithInputs(Output, newGates, newConnections);
+            await CopyWithInputs(Output, newGates, newConnections, newInputs);
 
             newOutput = (from el in newConnections where el.InputGate is Buffer select el.InputGate).FirstOrDefault();
-            newInputs.AddRange(from el in newConnections where el.OutputGate is Buffer select el.OutputGate);
+            newInputs.AddRange(from el in newGates where el is null == false && el.GetInputs.Count == 0 select el);
 
             GateSchema gateSchema = new GateSchema()
             {
@@ -86,7 +87,7 @@ namespace Symulator_układów_logicznych
         }
 
         // Copies given gate with its inputs and so on, adds them to the list
-        async Task CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, bool present = false, LogicGate inputCopy = null)
+        async Task CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, List<LogicGate> inputs, bool present = false, LogicGate inputCopy = null)
         {
             var nGate = inputCopy;
             if (!present)
@@ -105,9 +106,15 @@ namespace Symulator_układów_logicznych
 
                 nGate.ConnectWith(nInput);
                 connections.Add(new Connection(nInput, nGate));
-
-                CopyWithInputs(input, gates, connections, true, nInput);
+                
+                CopyWithInputs(input, gates, connections, inputs, true, nInput);
             }
+
+            if(nGate is Buffer 
+                && nGate.GetInputs.Count == 0
+                && !inputs.Contains(nGate)
+                && inputs.Count < numberOfInputs)
+                inputs.Add(nGate);
         }
 
         // fills workspace with given schema
@@ -197,8 +204,8 @@ namespace Symulator_układów_logicznych
             foreach(var input in startGate.GetInputs)
             {
                 LogicGate newInput = input;
-                //if (input is Buffer)
-                //    newInput = (input as Buffer).Holder;
+                if (input is Buffer && input.GetInputs.Count > 0)
+                   newInput = input.GetInputs[0];
 
                 await AddGateContainers(newInput, false, x + 150, y + currentInput * 150);
                 currentInput += 1;
@@ -220,14 +227,13 @@ namespace Symulator_układów_logicznych
                     input.Connections.Add(VisualConnection);
                     output.Connections.Add(VisualConnection);
                     Container.Children.Add(VisualConnection);
+                    VisualConnection.Update();
                 }
                 catch(InvalidOperationException _)
                 {
                     continue;
                 }
             }
-
-
         }
     }
 
