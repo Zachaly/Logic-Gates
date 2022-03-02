@@ -140,25 +140,17 @@ namespace Symulator_układów_logicznych
             {
                 ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, currentSchema), customGateColor, WorkSpace));
                 currentSchema = new GateSchema(WorkSpace);
-                SetStandartWorkspace();
+                SetStandartWorkspace(2);
                 currentSchema.UpdateSchema();
             }
             customGateSet = false;
         }
 
-        void SetStandartWorkspace()
+        void SetStandartWorkspace(int n)
         {
             WorkSpace.Children.Clear();
 
-            InputFieldContainer cont = new InputFieldContainer();
-            Canvas.SetTop(cont, 200);
-            Canvas.SetLeft(cont, 50);
-            WorkSpace.Children.Add(cont);
-
-            cont = new InputFieldContainer();
-            Canvas.SetTop(cont, 100);
-            Canvas.SetLeft(cont, 50);
-            WorkSpace.Children.Add(cont);
+            createInput(n);
 
             OutputFieldContainer output = new OutputFieldContainer();
             Canvas.SetTop(output, 150);
@@ -166,17 +158,17 @@ namespace Symulator_układów_logicznych
             WorkSpace.Children.Add(output);
         }
 
-        List<InputFieldContainer> getInputs()
-        {
-            return (from UIElement el in WorkSpace.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
-        }
-        void delInputs(List<InputFieldContainer> inputs)
-        {
-            foreach (InputFieldContainer el in inputs)
-            {
-                WorkSpace.Children.Remove(el);
-            }
-        }
+        //List<InputFieldContainer> getInputs()
+        //{
+        //    return (from UIElement el in WorkSpace.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
+        //}
+        //void delInputs(List<InputFieldContainer> inputs)
+        //{
+        //    foreach (InputFieldContainer el in inputs)
+        //    {
+        //        WorkSpace.Children.Remove(el);
+        //    }
+        //}
 
         void createInput(int n)
         {
@@ -191,30 +183,15 @@ namespace Symulator_układów_logicznych
 
         void numberOfGates2(object sender, RoutedEventArgs e)
         {
-            List<InputFieldContainer> cont = new List<InputFieldContainer>();
-
-            List<InputFieldContainer> inputList = getInputs();
-            delInputs(inputList);
-
-            createInput(2);
+            SetStandartWorkspace(2);
         }
         void numberOfGates4(object sender, RoutedEventArgs e)
-        {
-            List<InputFieldContainer> cont = new List<InputFieldContainer>();
-
-            List<InputFieldContainer> inputList = getInputs();
-            delInputs(inputList);
-
-            createInput(4);
+        { 
+            SetStandartWorkspace(4);
         }
         void numberOfGates8(object sender, RoutedEventArgs e)
         {
-            List<InputFieldContainer> cont = new List<InputFieldContainer>();
-
-            List<InputFieldContainer> inputList = getInputs();
-            delInputs(inputList);
-
-            createInput(8);
+            SetStandartWorkspace(8);
         }
     }
 }

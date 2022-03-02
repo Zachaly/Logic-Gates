@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace Symulator_układów_logicznych
 {
-    class GateSchema
+    public class GateSchema
     {
         public List<LogicGate> Gates { get; set; }
         public List<LogicGate> Inputs { get; set; }
@@ -83,6 +83,28 @@ namespace Symulator_układów_logicznych
 
             return gateSchema;
         }
+        public GateSchema TestClone()
+        {
+            List<LogicGate> newGates = new List<LogicGate>();
+            List<LogicGate> newInputs = new List<LogicGate>();
+            List<Connection> newConnections = new List<Connection>();
+            LogicGate newOutput = null;
+
+            CopyWithInputs(Output, newGates, newConnections);
+
+            newOutput = (from el in newConnections where el.InputGate is Buffer select el.InputGate).FirstOrDefault();
+            newInputs.AddRange(from el in newConnections where el.OutputGate is Buffer select el.OutputGate);
+
+            GateSchema gateSchema = new GateSchema()
+            {
+                Gates = newGates,
+                Connections = newConnections,
+                Output = newOutput,
+                Inputs = newInputs
+            };
+
+            return gateSchema;
+        }
 
         void CopyWithInputs(LogicGate gate, List<LogicGate> gates, List<Connection> connections, bool present = false, LogicGate inputCopy = null)
         {
@@ -107,7 +129,7 @@ namespace Symulator_układów_logicznych
     }
 
     // struct made to organize connections between two logic gates
-    struct Connection
+    public struct Connection
     {
         public LogicGate InputGate; // gate receiving the signal
         public LogicGate OutputGate; // gate giving a signal

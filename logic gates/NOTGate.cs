@@ -1,7 +1,7 @@
 ﻿
 namespace Symulator_układów_logicznych
 {
-    class NOTGate : LogicGate
+    public class NOTGate : LogicGate
     {
         // reverses the input value, returns false if there are no input
         public override bool Output

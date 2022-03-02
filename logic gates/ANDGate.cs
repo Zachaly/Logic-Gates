@@ -1,7 +1,7 @@
 ﻿
 namespace Symulator_układów_logicznych
 {
-    class ANDGate : LogicGate
+    public class ANDGate : LogicGate
     {
         // returns true if all inputs have the same logic value(all are true || all are false)
         public override bool Output
