@@ -4,7 +4,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
 
-
 namespace Symulator_układów_logicznych
 {
     partial class MainWindow : Window
@@ -129,29 +128,28 @@ namespace Symulator_układów_logicznych
             WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
-
-        private void AddCustomGate(object sender, RoutedEventArgs e)
+        public string customGateName = "";
+        public Color customGateColor = new Color();
+        public bool customGateSet = false;
+        public void AddCustomGate(object sender, RoutedEventArgs e)
         {
-            ToolBox.Items.Add(new ToolBoxItem(new CustomGate("XD", CurrentSchema), Colors.Blue, WorkSpace));
-            CurrentSchema = new GateSchema(WorkSpace);
-
-            SetStandartWorkspace();
-            CurrentSchema.UpdateSchema();
+            AddCustomGate newWindow = new AddCustomGate(customGateName);
+            newWindow.ShowDialog();
+            if (customGateSet)
+            {
+                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, currentSchema), customGateColor, WorkSpace));
+                CurrentSchema = new GateSchema(WorkSpace);
+                SetStandartWorkspace(2);
+                CurrentSchema.UpdateSchema();
+            }
+            customGateSet = false;
         }
 
-        void SetStandartWorkspace()
+        void SetStandartWorkspace(int n)
         {
             WorkSpace.Children.Clear();
 
-            InputFieldContainer cont = new InputFieldContainer();
-            Canvas.SetTop(cont, 200);
-            Canvas.SetLeft(cont, 50);
-            WorkSpace.Children.Add(cont);
-
-            cont = new InputFieldContainer();
-            Canvas.SetTop(cont, 100);
-            Canvas.SetLeft(cont, 50);
-            WorkSpace.Children.Add(cont);
+            createInput(n);
 
             OutputFieldContainer output = new OutputFieldContainer();
             Canvas.SetTop(output, 150);
@@ -164,6 +162,42 @@ namespace Symulator_układów_logicznych
             schema.FillWorkspaceWithSchema();
             CurrentSchema.UpdateSchema();
             var containers = from UIElement el in WorkSpace.Children where el is GateContainer select el as GateContainer;
+        //List<InputFieldContainer> getInputs()
+        //{
+        //    return (from UIElement el in WorkSpace.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
+        //}
+        //void delInputs(List<InputFieldContainer> inputs)
+        //{
+        //    foreach (InputFieldContainer el in inputs)
+        //    {
+        //        WorkSpace.Children.Remove(el);
+        //    }
+        }
+
+        void createInput(int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                InputFieldContainer cont = new InputFieldContainer();
+                Canvas.SetTop(cont, 10 + i * 70);
+                Canvas.SetLeft(cont, 50);
+                WorkSpace.Children.Add(cont);
+            }
+        }
+
+        void numberOfGates2(object sender, RoutedEventArgs e)
+        {
+            SetStandartWorkspace(2);
+        }
+        void numberOfGates4(object sender, RoutedEventArgs e)
+        { 
+            SetStandartWorkspace(4);
+        }
+        void numberOfGates8(object sender, RoutedEventArgs e)
+        {
+            SetStandartWorkspace(8);
         }
     }
 }
+
+            

@@ -4,7 +4,7 @@ using System.Linq;
 namespace Symulator_układów_logicznych
 {
     // logic gate created by user based on given schema
-    class CustomGate : LogicGate
+    public class CustomGate : LogicGate
     {
         GateSchema _schema;
 

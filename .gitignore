@@ -47,3 +47,36 @@ obj/Release/VisualConnection.g.cs
 *.resources
 obj/Debug/Symulator układów logicznych.csproj.FileListAbsolute.txt
 *.config
+bin
+obj
+obj/Debug/AddCustomGate.baml
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+obj/Debug/GateContainer.baml
+obj/Debug/InputFieldContainer.baml
+obj/Debug/MainWindow.baml
+obj/Debug/OutputFieldContainer.baml
+obj/Debug/Symulator układów logicznych.csproj.AssemblyReference.cache
+obj/Debug/Symulator układów logicznych_MarkupCompile.cache
+obj/Debug/Symulator układów logicznych_MarkupCompile.lref
+obj/Debug/ToolBoxItem.baml
+obj/Debug/VisualConnection.baml
+obj/Debug/Symulator układów logicznych.pdb
+obj/Debug/Symulator układów logicznych.exe
+obj/Debug/Symulator układów logicznych.csproj.FileListAbsolute.txt
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+bin/Debug/Symulator układów logicznych.pdb
+bin/Debug/Symulator układów logicznych.exe
+.vs/Symulator układów logicznych/v17/TestStore/0/testlog.manifest
+.vs/Symulator układów logicznych/v17/TestStore/0/001.testlog
+.vs/Symulator układów logicznych/v17/.suo
+.vs/Symulator układów logicznych/v17/.futdcache.v1
+.vs/Symulator układów logicznych/project-colors.json
+.vs/Symulator układów logicznych/DesignTimeBuild/.dtbcache.v2
+obj/Debug/Symulator układów logicznych.pdb
+obj/Debug/Symulator układów logicznych.exe
+obj/Debug/Symulator układów logicznych.csproj.FileListAbsolute.txt
+obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+bin/Debug/Symulator układów logicznych.pdb
+bin/Debug/Symulator układów logicznych.exe
+.vs/Symulator układów logicznych/v17/.suo
+.vs/Symulator układów logicznych/project-colors.json

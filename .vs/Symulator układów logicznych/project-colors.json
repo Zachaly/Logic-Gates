@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e0a187b9-7a98-4a9d-8ce2-94f1747162ee": {
+      "ProjectGuid": "e0a187b9-7a98-4a9d-8ce2-94f1747162ee",
+      "DisplayName": "Symulator układów logicznych",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
