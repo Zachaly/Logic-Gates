@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <Menu Background="Gray" Grid.Row="0" Grid.ColumnSpan="3">
-            <MenuItem Padding="3px" Margin="5,0,5,0" Header="New"/>
+            <MenuItem Padding="3px" Margin="5,0,5,0" Header="Clear schema" Click="ClearSchema"/>
             <MenuItem Padding="3px" Margin="5,0,5,0" Header="Numer of Inputs">
                 <MenuItem Padding="3px" Header="2 inputs" Click="numberOfGates2"/>
                 <MenuItem Padding="3px" Header="4 inputs" Click="numberOfGates4"/>

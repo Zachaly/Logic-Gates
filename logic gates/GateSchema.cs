@@ -36,7 +36,7 @@ namespace Symulator_układów_logicznych
 
             Inputs = (from UserControl el in Container.Children
                       where el is InputFieldContainer
-                      select (el as InputFieldContainer).Field as LogicGate).ToList();
+                      select (el as InputFieldContainer).Field).ToList();
 
             try
             {
@@ -92,7 +92,7 @@ namespace Symulator_układów_logicznych
             List<Connection> newConnections = new List<Connection>();
             LogicGate newOutput = null;
 
-            CopyWithInputs(Output, newGates, newConnections);
+            CopyWithInputs(Output, newGates, newConnections, newInputs);
 
             newOutput = (from el in newConnections where el.InputGate is Buffer select el.InputGate).FirstOrDefault();
             newInputs.AddRange(from el in newConnections where el.OutputGate is Buffer select el.OutputGate);
@@ -132,7 +132,7 @@ namespace Symulator_układów_logicznych
                 CopyWithInputs(input, gates, connections, inputs, true, nInput);
             }
 
-            if(nGate is Buffer 
+            if (nGate is Buffer
                 && nGate.GetInputs.Count == 0
                 && !inputs.Contains(nGate)
                 && inputs.Count < numberOfInputs)
@@ -184,21 +184,6 @@ namespace Symulator_układów_logicznych
             await AddGateContainers(schema.Output, true);
             AddGateConnections(schema);
 
-            var inputField = (from UIElement el in Container.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
-            var items = (from UIElement el in Container.Children where el is IWorkspaceItem select el as IWorkspaceItem).ToList();
-
-            foreach(var input in inputField)
-            {
-                var outputs = (from el in items where input.Gate.Outputs.Contains(el.Gate) select el).ToList();
-                foreach(var outputGate in outputs)
-                {
-                    VisualConnection VisualConnection = new VisualConnection(input, outputGate as UserControl);
-                    input.Connections.Add(VisualConnection);
-                    outputGate.Connections.Add(VisualConnection);
-                    Container.Children.Add(VisualConnection);
-                    VisualConnection.Update();
-                }
-            }
         }
 
         // Adds gate containers to Workspace

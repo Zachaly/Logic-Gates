@@ -80,3 +80,6 @@ bin/Debug/Symulator układów logicznych.pdb
 bin/Debug/Symulator układów logicznych.exe
 .vs/Symulator układów logicznych/v17/.suo
 .vs/Symulator układów logicznych/project-colors.json
+*.baml
+obj/Debug/AddCustomGate.baml
+obj/Debug/AddCustomGate.baml

@@ -20,6 +20,8 @@ namespace Symulator_układów_logicznych
             CurrentSchema = new GateSchema(WorkSpace);
         }
 
+        #region DragAndDrop
+
         // Drag and drop for elements in workspace
         private void WorkSpace_Drop(object sender, DragEventArgs e)
         {
@@ -36,6 +38,7 @@ namespace Symulator_układów_logicznych
             Canvas.SetLeft(DragElement, position.X);
             Canvas.SetTop(DragElement, position.Y);
         }
+        #endregion
 
         // Deletes element from workspace
         public void DeleteContainer(GateContainer container)
@@ -62,10 +65,7 @@ namespace Symulator_układów_logicznych
         }
 
         // Shuts down app
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-            App.Current.Shutdown();
-        }
+        
 
 
         // Connects 2 elements both graphically and logically
@@ -128,6 +128,9 @@ namespace Symulator_układów_logicznych
             WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
+
+        #region SettingWorkspace
+
         public string customGateName = "";
         public Color customGateColor = new Color();
         public bool customGateSet = false;
@@ -137,7 +140,7 @@ namespace Symulator_układów_logicznych
             newWindow.ShowDialog();
             if (customGateSet)
             {
-                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, currentSchema), customGateColor, WorkSpace));
+                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, CurrentSchema), customGateColor, WorkSpace));
                 CurrentSchema = new GateSchema(WorkSpace);
                 SetStandartWorkspace(2);
                 CurrentSchema.UpdateSchema();
@@ -145,7 +148,7 @@ namespace Symulator_układów_logicznych
             customGateSet = false;
         }
 
-        void SetStandartWorkspace(int n)
+        public void SetStandartWorkspace(int n)
         {
             WorkSpace.Children.Clear();
 
@@ -162,16 +165,6 @@ namespace Symulator_układów_logicznych
             schema.FillWorkspaceWithSchema();
             CurrentSchema.UpdateSchema();
             var containers = from UIElement el in WorkSpace.Children where el is GateContainer select el as GateContainer;
-        //List<InputFieldContainer> getInputs()
-        //{
-        //    return (from UIElement el in WorkSpace.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
-        //}
-        //void delInputs(List<InputFieldContainer> inputs)
-        //{
-        //    foreach (InputFieldContainer el in inputs)
-        //    {
-        //        WorkSpace.Children.Remove(el);
-        //    }
         }
 
         void createInput(int n)
@@ -196,6 +189,17 @@ namespace Symulator_układów_logicznych
         void numberOfGates8(object sender, RoutedEventArgs e)
         {
             SetStandartWorkspace(8);
+        }
+
+        void ClearSchema(object sender, RoutedEventArgs e)
+        {
+            SetStandartWorkspace((from UIElement el in WorkSpace.Children where el is InputFieldContainer select el).ToList().Count);
+        }
+        #endregion
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
         }
     }
 }
