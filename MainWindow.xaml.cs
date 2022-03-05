@@ -40,6 +40,7 @@ namespace Symulator_układów_logicznych
         }
         #endregion
 
+        #region ModifyElementsInWorkspace
         // Deletes element from workspace
         public void DeleteContainer(GateContainer container)
         {
@@ -62,12 +63,9 @@ namespace Symulator_układów_logicznych
         public void DeleteConnection(VisualConnection con)
         {
             WorkSpace.Children.Remove(con);
+            CurrentSchema.UpdateSchema();
         }
-
-        // Shuts down app
         
-
-
         // Connects 2 elements both graphically and logically
         void CreateGateConnection(object sender, MouseEventArgs ea)
         {
@@ -84,21 +82,14 @@ namespace Symulator_układów_logicznych
                 IWorkspaceItem Gate = result as IWorkspaceItem;
 
                 // NOT gate can have only one input, same with output field
+                // Custom gate cannot have more inputs than number of input buffers
 
-                if (Gate is GateContainer)
-                    if ((Gate as GateContainer).Gate is NOTGate &&
-                        (Gate as GateContainer).Gate.GetInputs.Count > 0)
-                    {
-                        WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
-                        return;
-                    }
-
-                if (Gate is OutputFieldContainer)
-                    if ((Gate as OutputFieldContainer).Field.GetInputs.Count > 0)
-                    {
-                        WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
-                        return;
-                    }
+                if((Gate.Gate is NOTGate && Gate.Gate.GetInputs.Count > 0)
+                    || (Gate.Gate is CustomGate && (Gate.Gate as CustomGate).GetInputs.Count >= (Gate.Gate as CustomGate).Schema.Inputs.Count))
+                {
+                    WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
+                    return;
+                }
 
                 // Input field cannot have input
                 if (Gate is InputFieldContainer)
@@ -128,6 +119,7 @@ namespace Symulator_układów_logicznych
             WorkSpace.MouseLeftButtonDown -= CreateGateConnection;
             WorkSpace.MouseLeftButtonDown += CreateGateConnection;
         }
+        #endregion
 
         #region SettingWorkspace
 
@@ -197,6 +189,7 @@ namespace Symulator_układów_logicznych
         }
         #endregion
 
+        // Shuts down app
         private void Exit(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();

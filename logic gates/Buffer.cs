@@ -9,7 +9,7 @@ namespace Symulator_układów_logicznych
     // Used only in custom gates to replace input fields
     class Buffer : LogicGate
     {
-        public CustomGate Holder { get; set; }
+        public LogicGate Holder { get; set; }
 
         // Buffer sends the same signal that it receives
         public override bool Output 
@@ -33,7 +33,7 @@ namespace Symulator_układów_logicznych
 
         public Buffer() : base("Buffer")
         {
-
+            Holder = this;
         }
 
         // Buffer can have only one input

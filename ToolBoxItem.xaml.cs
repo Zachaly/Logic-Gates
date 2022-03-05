@@ -57,6 +57,7 @@ namespace Symulator_układów_logicznych
             Canvas.SetTop(gateContainer, WorkSpace.ActualHeight / 2 - this.ActualHeight);
             WorkSpace.Children.Add(gateContainer);
             MainWindow.CurrentSchema.UpdateSchema();
+            Gate.Cloned = false;
         }
     }
 }

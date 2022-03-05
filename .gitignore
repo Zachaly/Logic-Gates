@@ -83,3 +83,7 @@ bin/Debug/Symulator układów logicznych.exe
 *.baml
 obj/Debug/AddCustomGate.baml
 obj/Debug/AddCustomGate.baml
+obj/Debug/AddCustomGate.g.i.cs
+obj/Debug/AddCustomGate.g.cs
+obj/Debug/AddCustomGate.baml
+.vs/ProjectSettings.json

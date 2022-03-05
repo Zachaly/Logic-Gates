@@ -11,12 +11,16 @@ namespace Symulator_układów_logicznych
         public List<LogicGate> GetInputs { get { return Inputs; } } // returns inputs
         public string Name { get { return _name; } } // returns friendly name of this logic gate
         public List<LogicGate> Outputs { get; }
+        public bool Cloned { get; set; } = false;
+
+        private LogicGate lastClone;
 
         public LogicGate(string name)
         {
             Inputs = new List<LogicGate>();
             Outputs = new List<LogicGate>();
             _name = name;
+            Cloned = false;
         }
 
         // adds given gate to inputs of this one
@@ -26,7 +30,7 @@ namespace Symulator_układów_logicznych
         }
 
         // removes gate from inputs
-        public void Disconnect(LogicGate gate)
+        public virtual void Disconnect(LogicGate gate)
         {
             Inputs.Remove(gate);
             gate.Outputs.Remove(this);
@@ -35,22 +39,26 @@ namespace Symulator_układów_logicznych
         // Clone differs on logic gate type
         public LogicGate Clone()
         {
+            if (Cloned)
+                return lastClone;
+            
             if (this is ANDGate)
-                return new ANDGate();
+                lastClone =  new ANDGate();
             else if (this is NOTGate)
-                return new NOTGate();
+                lastClone = new NOTGate();
             else if (this is InputField || this is OutputField)
-                return new Buffer();
+                lastClone = new Buffer();
             else if (this is Buffer)
-                return new Buffer();
+                lastClone = new Buffer();
             else if (this is CustomGate)
             {
                 CustomGate gate = this as CustomGate;
 
-                return new CustomGate(Name, gate.Schema.Clone().Result);
+                lastClone =  new CustomGate(Name, gate.Schema.Clone().Result);
             }
 
-            return null;
+            Cloned = true;
+            return lastClone;
         }
     }
 }

@@ -14,6 +14,6 @@
         <Button x:Name="createBt" Content="Create" HorizontalAlignment="Center" Margin="0,218,0,0" VerticalAlignment="Top" Background="#FF059000" Foreground="White" Padding="10,3,10,3" Click="createBt_Click"/>
         <xctk:ColorPicker x:Name="cp" Margin="202,77,132,162" DisplayColorAndName="True" SelectedColorChanged="cp_SelectedColorChanged_1" AvailableColorsSortingMode="HueSaturationBrightness" />
         <Label x:Name="Wprowadź_nazwę_Copy" Content="Enter custom gate color" HorizontalAlignment="Left" Margin="36,76,0,0" VerticalAlignment="Top"/>
-        <Label Content="Max 8 znaków&#xD;&#xA;" HorizontalAlignment="Left" Margin="357,50,0,0" VerticalAlignment="Top" Width="110" Height="26"/>
+        <Label Content="Max 8 characters" HorizontalAlignment="Left" Margin="357,50,0,0" VerticalAlignment="Top" Width="110" Height="26"/>
     </Grid>
 </Window>
