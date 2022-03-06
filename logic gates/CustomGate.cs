@@ -1,46 +1,62 @@
 ﻿using System.Collections.Generic;
 
-
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
-    // logic gate created by user based on given schema
-    class CustomGate : LogicGate
+    // Logic gate created by user, based on given schema
+    public class CustomGate : LogicGate
     {
-        GateSchema _schema;
-
-        List<LogicGate> Gates; // gates used in this custom one
-        List<Connection> Connections; // connections between the gates
-        OutputField OutputGate; // gate used as an output
-        public GateSchema Schema { get { return _schema; } } // schema describing this gate
-        public override bool Output // output of the custom gate is an output of output gate
+        GateSchema _schema; // Schema of this custom gate
+        LogicGate OutputGate; // Gate used as an output
+        List<LogicGate> BufferInputs; // buffers that gates connect with
+        public GateSchema Schema // Schema describing this gate
+        { 
+            get => _schema; 
+        } 
+        public override bool Output // Output of the custom gate is an output of output gate
         {
-            get
-            {
-                return OutputGate.Output;
-            }
+            get => OutputGate.Output;
         }
+
         public CustomGate(string name, GateSchema schema) : base(name)
         {
             UpdateSchema(schema);
         }
 
-
-        // connects given gate with this one's output
+        // Connects given gate with this one's output
         public override void ConnectWith(LogicGate gate)
         {
-            gate.ConnectWith(OutputGate);
+            foreach(var buffer in BufferInputs)
+                if(buffer.GetInputs.Count == 0)
+                {
+                    base.ConnectWith(gate);
+                    buffer.ConnectWith(gate);
+                    if (gate is Buffer)
+                        Inputs.Add((gate as Buffer).Holder);
+                    else
+                        Inputs.Add(gate);
+                    break;
+                }
         }
 
-        // updates info basing on given schema
+        public override void Disconnect(LogicGate gate)
+        {
+            foreach (var buffer in BufferInputs)
+                if (buffer.GetInputs.Contains(gate))
+                    buffer.Disconnect(gate);
+
+            base.Disconnect(gate);
+        }
+
+        // Updates info basing on given schema
         public void UpdateSchema(GateSchema schema)
         {
-            _schema = schema;
-            Gates = schema.Gates;
-            Connections = schema.Connections;
+            _schema = schema.Clone().Result;
             OutputGate = schema.Output;
+            BufferInputs = schema.Inputs;
+
+            foreach (var buffer in schema.Gates)
+                if(buffer is Buffer)
+                    (buffer as Buffer).Holder = this;
         }
-
-
     }
-
 }

@@ -1,9 +1,8 @@
-﻿
-namespace Symulator_układów_logicznych
+﻿namespace LogicGates
 {
-    class ANDGate : LogicGate
+    public class ANDGate : LogicGate
     {
-        // returns true if all inputs have the same logic value(all are true || all are false)
+        // Returns true if all inputs have the same logic value(all are true || all are false)
         public override bool Output
         {
             get
@@ -11,8 +10,8 @@ namespace Symulator_układów_logicznych
                 if (Inputs.Count == 0 || Inputs.Count == 1)
                     return false;
 
-                foreach (var inp in Inputs)
-                    if (!inp.Output)
+                foreach (var input in Inputs)
+                    if (!input.Output)
                         return false;
 
                 return true;
@@ -22,6 +21,7 @@ namespace Symulator_układów_logicznych
 
         public override void ConnectWith(LogicGate gate)
         {
+            base.ConnectWith(gate);
             Inputs.Add(gate);
         }
     }

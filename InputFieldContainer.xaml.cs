@@ -4,13 +4,17 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Holds an input signal
     partial class InputFieldContainer : UserControl, IWorkspaceItem
     {
-        public InputField Field { get; set; }
+        public LogicGate Gate 
+        { 
+            get => Field; 
+            set => Field = value; 
+        }
+        public LogicGate Field { get; set; }
         public List<VisualConnection> Connections { get; set; }
 
         public InputFieldContainer()
@@ -23,13 +27,13 @@ namespace Symulator_układów_logicznych
         // Changes the logical state and color on click
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Field.ChangeLogicalState();
+            (Field as InputField).ChangeLogicalState();
             if (Field.Output)
                 Circle.Fill = new SolidColorBrush(Colors.Red);
             else
                 Circle.Fill = new SolidColorBrush(Colors.Gray);
 
-            MainWindow.currentSchema.UpdateSchema();
+            MainWindow.CurrentSchema.UpdateSchema();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

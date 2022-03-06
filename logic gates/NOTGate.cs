@@ -1,17 +1,23 @@
-﻿
-namespace Symulator_układów_logicznych
+﻿namespace LogicGates
 {
-    class NOTGate : LogicGate
+    public class NOTGate : LogicGate
     {
-        // reverses the input value, returns false if there are no input
+        // Reverses the input value, returns false if there are no input
         public override bool Output
         {
             get
             {
-                if (Inputs[0] is null)
+                try
+                {
+                    if (Inputs[0] is null == false)
+                        return !Inputs[0].Output;
+                    else
+                        return false;
+                }
+                catch (System.ArgumentOutOfRangeException _)
+                {
                     return false;
-
-                return !Inputs[0].Output;
+                }
             }
         }
 
@@ -20,8 +26,11 @@ namespace Symulator_układów_logicznych
         // NOT can have only one input, the function does not add to list, it replaces the element
         public override void ConnectWith(LogicGate gate)
         {
-            if (Inputs.Count < 1)
-                Inputs.Add(gate);
+            if (Inputs.Count > 0)
+                return;
+
+            base.ConnectWith(gate);
+            Inputs.Add(gate);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿<Application x:Class="Symulator_układów_logicznych.App"
+﻿<Application x:Class="LogicGates.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Symulator_układów_logicznych"
+             xmlns:local="clr-namespace:LogicGates"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

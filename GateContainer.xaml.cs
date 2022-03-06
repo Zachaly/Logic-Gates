@@ -4,14 +4,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
-    // class for a graphical field containg the logic gate 
+    // Class for a graphical field containg the logic gate 
     partial class GateContainer : UserControl, IWorkspaceItem
     {
-        public LogicGate Gate;
+        public LogicGate Gate { get; set; }
         public List<VisualConnection> Connections { get; set; }
 
+        public static Dictionary<string, Color> GateColours { get; } = new Dictionary<string, Color>(); // Stores info about colors of different gate types
         public GateContainer() : base()
         {
             InitializeComponent();
@@ -43,26 +44,20 @@ namespace Symulator_układów_logicznych
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragDrop.DoDragDrop(this, new DataObject(DataFormats.Serializable, this), DragDropEffects.All);
-                foreach (var con in Connections)
-                    con.Update();
+                foreach (var connection in Connections)
+                    connection.Update();
             }
         }
 
         //Implementation of IWorkspaceItem
         public void CreateConnection(IWorkspaceItem target)
         {
-            if (target is GateContainer)
-                (target as GateContainer).Gate.ConnectWith(Gate);
-            else if (target is OutputFieldContainer)
-                (target as OutputFieldContainer).Field.ConnectWith(Gate);
+            target.Gate.ConnectWith(Gate);
         }
 
         public void DeleteConnection(IWorkspaceItem target)
         {
-            if (target is GateContainer)
-                (target as GateContainer).Gate.Disconnect(Gate);
-            else if (target is OutputFieldContainer)
-                (target as OutputFieldContainer).Field.Disconnect(Gate);
+            target.Gate.Disconnect(Gate);
         }
 
         public void CreateVisualConnection()
@@ -81,10 +76,10 @@ namespace Symulator_układów_logicznych
                 Canvas.GetTop(this) + Height / 2);
         }
 
-        public Point GetEndPoint(int conNum)
+        public Point GetEndPoint(int connectionNumber)
         {
             double left = Canvas.GetLeft(this);
-            double top = Canvas.GetTop(this) + Height / (Connections.Count + 2) + conNum * 10;
+            double top = Canvas.GetTop(this) + Height / (Connections.Count + 2) + connectionNumber * 10;
 
             Point pt = new Point(left, top);
 

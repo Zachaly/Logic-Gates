@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     public partial class App : Application
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Symulator_układów_logicznych.Properties
+namespace LogicGates.Properties
 {
 
 

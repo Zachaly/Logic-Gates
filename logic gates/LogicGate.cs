@@ -1,51 +1,68 @@
 ﻿using System.Collections.Generic;
-using System;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
-    public abstract class LogicGate : ICloneable
+    public abstract class LogicGate
     {
         string _name = "";
-        abstract public bool Output { get; } // an output signal of this logic gates
-        protected List<LogicGate> Inputs; // gates connected with this one
-        public List<LogicGate> GetInputs { get { return Inputs; } } // returns inputs
-        public string Name { get { return _name; } } // returns friendly name of this logic gate
+        abstract public bool Output { get; } // An output signal of this logic gates
+        protected List<LogicGate> Inputs; // Gates connected with this one
+        public List<LogicGate> GetInputs // Returns inputs
+        {
+            get => Inputs;  
+        } 
+        public string Name // Returns friendly name of this logic gate
+        {
+            get => _name;
+        } 
+        public List<LogicGate> Outputs { get; }
+        public bool Cloned { get; set; } = false;
+        private LogicGate lastClone; // Last clone of this gate
 
         public LogicGate(string name)
         {
             Inputs = new List<LogicGate>();
+            Outputs = new List<LogicGate>();
             _name = name;
+            Cloned = false;
         }
 
-        // adds given gate to inputs of this one
-        abstract public void ConnectWith(LogicGate gate);
+        // Adds given gate to inputs of this one
+        virtual public void ConnectWith(LogicGate gate)
+        {
+            gate.Outputs.Add(this);
+        }
 
-        // removes gate from inputs
-        public void Disconnect(LogicGate gate)
+        // Removes gate from inputs
+        public virtual void Disconnect(LogicGate gate)
         {
             Inputs.Remove(gate);
+            gate.Outputs.Remove(this);
         }
 
-        // Clone differs on logic gate type
-        public object Clone()
+        // Clone differs on logic gate type, if this gate is already cloned return last clone
+        public LogicGate Clone()
         {
+            if (Cloned)
+                return lastClone;
+            
             if (this is ANDGate)
-                return new ANDGate();
+                lastClone =  new ANDGate();
             else if (this is NOTGate)
-                return new NOTGate();
-            else if (this is InputField)
-                return new InputField();
-            else if (this is OutputField)
-                return new OutputField();
+                lastClone = new NOTGate();
+            else if (this is InputField || this is OutputField)
+                lastClone = new Buffer();
+            else if (this is Buffer)
+                lastClone = new Buffer();
             else if (this is CustomGate)
             {
                 CustomGate gate = this as CustomGate;
 
-                return new CustomGate(Name, (GateSchema)gate.Schema.Clone());
+                lastClone =  new CustomGate(Name, gate.Schema.Clone().Result);
             }
 
-            return null;
+            Cloned = true;
+            return lastClone;
         }
     }
-
 }
