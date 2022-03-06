@@ -160,7 +160,7 @@
     <Compile Include="AddCustomGate.xaml.cs">
       <DependentUpon>AddCustomGate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ColorDialog.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="IWorkspaceItem.cs" />
     <Compile Include="InputFieldContainer.xaml.cs">
       <DependentUpon>InputFieldContainer.xaml</DependentUpon>

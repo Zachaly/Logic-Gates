@@ -1,9 +1,9 @@
-﻿<Window x:Class="Symulator_układów_logicznych.MainWindow"
+﻿<Window x:Class="LogicGates.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Symulator_układów_logicznych"
+        xmlns:local="clr-namespace:LogicGates"
         mc:Ignorable="d"
         Title="Symulator układów logicznych" d:DesignHeight="698.518" d:DesignWidth="1250.883">
     <Grid>
@@ -31,12 +31,11 @@
 
         <Canvas Background="Transparent" Grid.Row="1" x:Name="WorkSpace" 
                 Drop="WorkSpace_Drop" DragOver="WorkSpace_DragOver" AllowDrop="True" Grid.ColumnSpan="3" Margin="0,0,0,25" Grid.RowSpan="2">
-
             <local:InputFieldContainer Canvas.Top="10" Canvas.Left="50"/>
 
             <local:InputFieldContainer Canvas.Top="80" Canvas.Left="50"/>
 
-            <local:OutputFieldContainer Canvas.Top="250" Canvas.Right="50" x:Name="Output"/>
+            <local:OutputFieldContainer Canvas.Top="150" Canvas.Right="50" x:Name="Output"/>
         </Canvas>
 
         <Menu x:Name="ToolBox"  Background="Gray" Grid.Row="2" Grid.ColumnSpan="3"/>

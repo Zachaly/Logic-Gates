@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Logic gate created by user, based on given schema
     public class CustomGate : LogicGate
@@ -10,7 +8,10 @@ namespace Symulator_układów_logicznych
         GateSchema _schema; // Schema of this custom gate
         LogicGate OutputGate; // Gate used as an output
         List<LogicGate> BufferInputs; // buffers that gates connect with
-        public GateSchema Schema { get { return _schema; } } // Schema describing this gate
+        public GateSchema Schema // Schema describing this gate
+        { 
+            get => _schema; 
+        } 
         public override bool Output // Output of the custom gate is an output of output gate
         {
             get => OutputGate.Output;
@@ -21,15 +22,14 @@ namespace Symulator_układów_logicznych
             UpdateSchema(schema);
         }
 
-
         // Connects given gate with this one's output
         public override void ConnectWith(LogicGate gate)
         {
-            foreach(var buff in BufferInputs)
-                if(buff.GetInputs.Count == 0)
+            foreach(var buffer in BufferInputs)
+                if(buffer.GetInputs.Count == 0)
                 {
                     base.ConnectWith(gate);
-                    buff.ConnectWith(gate);
+                    buffer.ConnectWith(gate);
                     if (gate is Buffer)
                         Inputs.Add((gate as Buffer).Holder);
                     else
@@ -40,9 +40,9 @@ namespace Symulator_układów_logicznych
 
         public override void Disconnect(LogicGate gate)
         {
-            foreach (var buff in BufferInputs)
-                if (buff.GetInputs.Contains(gate))
-                    buff.Disconnect(gate);
+            foreach (var buffer in BufferInputs)
+                if (buffer.GetInputs.Contains(gate))
+                    buffer.Disconnect(gate);
 
             base.Disconnect(gate);
         }
@@ -54,9 +54,9 @@ namespace Symulator_układów_logicznych
             OutputGate = schema.Output;
             BufferInputs = schema.Inputs;
 
-            foreach (var buff in schema.Gates)
-                if(buff is Buffer)
-                    (buff as Buffer).Holder = this;
+            foreach (var buffer in schema.Gates)
+                if(buffer is Buffer)
+                    (buffer as Buffer).Holder = this;
         }
     }
 }

@@ -2,13 +2,12 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Linq;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     partial class MainWindow : Window
     {
-        public static UIElement DragElement { get; set; } // element used in drag and drop
+        public static UserControl DragElement { get; set; } // element used in drag and drop
         internal static GateSchema CurrentSchema { get; set; } // elements currently in workspace
         UserControl ConnectedGate; // element that connects to another in this moment
 
@@ -27,16 +26,16 @@ namespace Symulator_układów_logicznych
         {
             Point position = e.GetPosition(WorkSpace);
 
-            Canvas.SetLeft(DragElement, position.X);
-            Canvas.SetTop(DragElement, position.Y);
+            Canvas.SetLeft(DragElement, position.X - (DragElement.ActualWidth / 2));
+            Canvas.SetTop(DragElement, position.Y - (DragElement.ActualHeight / 2));
         }
 
         private void WorkSpace_DragOver(object sender, DragEventArgs e)
         {
             Point position = e.GetPosition(WorkSpace);
 
-            Canvas.SetLeft(DragElement, position.X);
-            Canvas.SetTop(DragElement, position.Y);
+            Canvas.SetLeft(DragElement, position.X - (DragElement.ActualWidth / 2));
+            Canvas.SetTop(DragElement, position.Y - (DragElement.ActualHeight / 2));
         }
         #endregion
 
@@ -123,32 +122,33 @@ namespace Symulator_układów_logicznych
 
         #region SettingWorkspace
 
-        public string customGateName = "";
-        public Color customGateColor = new Color();
-        public bool customGateSet = false;
+        public string CustomGateName { get; set; } = "";
+        public Color CustomGateColor { get; set; }
+        public bool CustomGateSet { get; set; } = false;
         public void AddCustomGate(object sender, RoutedEventArgs e)
         {
-            AddCustomGate newWindow = new AddCustomGate(customGateName);
+            AddCustomGate newWindow = new AddCustomGate(CustomGateName);
             newWindow.ShowDialog();
-            if (customGateSet)
+            if (CustomGateSet)
             {
-                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(customGateName, CurrentSchema), customGateColor, WorkSpace));
+                int numberOfInputs = CurrentSchema.NumberOfInputs;
+                ToolBox.Items.Add(new ToolBoxItem(new CustomGate(CustomGateName, CurrentSchema), CustomGateColor, WorkSpace));
                 CurrentSchema = new GateSchema(WorkSpace);
-                SetStandartWorkspace(2);
+                SetStandartWorkspace(numberOfInputs);
                 CurrentSchema.UpdateSchema();
             }
-            customGateSet = false;
+            CustomGateSet = false;
         }
 
         public void SetStandartWorkspace(int n)
         {
             WorkSpace.Children.Clear();
 
-            createInput(n);
+            CreateInput(n);
 
             OutputFieldContainer output = new OutputFieldContainer();
-            Canvas.SetTop(output, 150);
-            Canvas.SetRight(output, 50);
+            Canvas.SetTop(output, Constants.OutputVerticalPosition);
+            Canvas.SetRight(output, Constants.DistanceFromVerticalBorder);
             WorkSpace.Children.Add(output);
         }
 
@@ -156,16 +156,15 @@ namespace Symulator_układów_logicznych
         {
             schema.FillWorkspaceWithSchema();
             CurrentSchema.UpdateSchema();
-            var containers = from UIElement el in WorkSpace.Children where el is GateContainer select el as GateContainer;
         }
 
-        void createInput(int n)
+        void CreateInput(int n)
         {
             for (int i = 0; i < n; i++)
             {
                 InputFieldContainer cont = new InputFieldContainer();
-                Canvas.SetTop(cont, 10 + i * 70);
-                Canvas.SetLeft(cont, 50);
+                Canvas.SetTop(cont, 10 + i * Constants.DistanceBetweenElements);
+                Canvas.SetLeft(cont, Constants.DistanceFromVerticalBorder);
                 WorkSpace.Children.Add(cont);
             }
         }
@@ -185,7 +184,7 @@ namespace Symulator_układów_logicznych
 
         void ClearSchema(object sender, RoutedEventArgs e)
         {
-            SetStandartWorkspace((from UIElement el in WorkSpace.Children where el is InputFieldContainer select el).ToList().Count);
+            SetStandartWorkspace(CurrentSchema.NumberOfInputs);
         }
         #endregion
 
@@ -195,6 +194,4 @@ namespace Symulator_układów_logicznych
             App.Current.Shutdown();
         }
     }
-}
-
-            
+}         

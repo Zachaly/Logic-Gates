@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Used only in custom gates to replace input fields
     class Buffer : LogicGate
@@ -23,11 +19,10 @@ namespace Symulator_układów_logicznych
                     else
                         return false;
                 }
-                catch (System.ArgumentOutOfRangeException _)
+                catch (ArgumentOutOfRangeException _)
                 {
                     return false;
                 }
-                
             }
         }
 

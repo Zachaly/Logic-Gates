@@ -1,5 +1,4 @@
-﻿
-namespace Symulator_układów_logicznych
+﻿namespace LogicGates
 {
     public class ANDGate : LogicGate
     {
@@ -11,8 +10,8 @@ namespace Symulator_układów_logicznych
                 if (Inputs.Count == 0 || Inputs.Count == 1)
                     return false;
 
-                foreach (var inp in Inputs)
-                    if (!inp.Output)
+                foreach (var input in Inputs)
+                    if (!input.Output)
                         return false;
 
                 return true;

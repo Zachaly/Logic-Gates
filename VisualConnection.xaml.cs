@@ -3,18 +3,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Class responsible to show connection between two gates in workspace
     public partial class VisualConnection : UserControl
     {
-        IWorkspaceItem Start; // Gate that start the connection
-        IWorkspaceItem Target;
-        Point StartPoint; // Graphical point where connection start
-        Point EndPoint;
+        IWorkspaceItem Start; // Gate that starts the connection
+        IWorkspaceItem Target; // Gate that ends the connection
+        Point StartPoint; // Graphical point where connection starts
+        Point EndPoint; // Graphical point where connection ends
 
-        // returns place on the list of connections
+        // Returns place on the list of connections
         int ConnectionNum
         {
             get

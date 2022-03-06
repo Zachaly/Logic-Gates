@@ -5,7 +5,7 @@ using System;
 using System.Windows;
 using System.Threading.Tasks;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     public class GateSchema
     {
@@ -16,7 +16,7 @@ namespace Symulator_układów_logicznych
         // Field containing output, used to refresh appearance when something changes
         OutputFieldContainer OutputContainer;
         public List<Connection> Connections { get; set; }
-        int numberOfInputs { get => Inputs.Count; }
+        public int NumberOfInputs { get => Inputs.Count; }
 
         Canvas Container; // Workspace from which gates are loaded
         public GateSchema(Canvas canv)
@@ -148,17 +148,16 @@ namespace Symulator_układów_logicznych
                 inputs.Add(newGate);
         }
 
-        // fills workspace with given schema
+        // Fills workspace with given schema
         public async void FillWorkspaceWithSchema()
         {
             var schema = await Clone();
             Container.Children.Clear();
 
-            (App.Current.MainWindow as MainWindow).SetStandartWorkspace(schema.numberOfInputs);
-
-            var gates = from el in schema.Gates where !(el is Buffer) select el;
+            (App.Current.MainWindow as MainWindow).SetStandartWorkspace(schema.NumberOfInputs);
             var inputContainers = (from UIElement el in Container.Children where el is InputFieldContainer select el as InputFieldContainer).ToList();
 
+            // Replaces buffer inputs with input fields
             for(int i = 0; i < schema.Inputs.Count; i++)
             {
                 LogicGate[] outputs = new LogicGate[schema.Inputs[i].Outputs.Count];
@@ -171,7 +170,10 @@ namespace Symulator_układów_logicznych
                         outputs[j].Disconnect(schema.Inputs[i]);
                     }
                 }
-                catch(NullReferenceException _) { }
+                catch(NullReferenceException _) 
+                { 
+
+                }
                 schema.Inputs[i] = new InputField();
                 inputContainers[i].Field = schema.Inputs[i];
 
@@ -192,6 +194,7 @@ namespace Symulator_układów_logicznych
                 }
             }
 
+            // Replaces buffer output with output field
             var outputConnection = (from el in schema.Connections where el.InputGate == schema.Output select el).First();
             schema.Connections.Remove(outputConnection);
             schema.Output = new OutputField();
@@ -201,6 +204,7 @@ namespace Symulator_układów_logicznych
             OutputFieldContainer output = (from UIElement el in Container.Children where el is OutputFieldContainer select el as OutputFieldContainer).First();
             output.Field = schema.Output;
 
+            // Adds visual gate containers and connections between them
             await AddGateContainers(schema.Output, true);
             AddGateConnections(schema.Output);
 
@@ -235,7 +239,8 @@ namespace Symulator_układów_logicznych
                 if (input is Buffer && input.GetInputs.Count > 0)
                    newInput = input.GetInputs[0];
 
-                await AddGateContainers(newInput, false, x + 150, y + currentInput * 150);
+                await AddGateContainers(newInput, false, x + Constants.HorizontalDistanceBetweenGateContainers,
+                    y + currentInput * Constants.VerticalDistanceBetweenGateContainers);
                 currentInput += 1;
             }
         }

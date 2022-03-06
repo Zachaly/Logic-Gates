@@ -1,14 +1,12 @@
-﻿
-namespace Symulator_układów_logicznych
+﻿namespace LogicGates
 {
     public class NOTGate : LogicGate
     {
-        // reverses the input value, returns false if there are no input
+        // Reverses the input value, returns false if there are no input
         public override bool Output
         {
             get
             {
-
                 try
                 {
                     if (Inputs[0] is null == false)

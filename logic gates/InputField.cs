@@ -1,13 +1,12 @@
-﻿
-namespace Symulator_układów_logicznych
+﻿namespace LogicGates
 {
-    // field that is generating the logical sygnal
+    // Field that is generating the logical sygnal
     public class InputField : LogicGate
     {
-        bool logical_state = false; // current output of the field
+        bool logicalState = false; // Current output of the field
         public override bool Output
         {
-            get { return logical_state; }
+            get => logicalState;
         }
 
         public InputField() : base("Input Field") { }
@@ -18,10 +17,10 @@ namespace Symulator_układów_logicznych
             gate.ConnectWith(this);
         }
 
-        // reverses current logical state
+        // Reverses current logical state
         public void ChangeLogicalState()
         {
-            logical_state = !logical_state;
+            logicalState = !logicalState;
         }
     }
 }

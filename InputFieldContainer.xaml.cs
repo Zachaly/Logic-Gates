@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Holds an input signal
     partial class InputFieldContainer : UserControl, IWorkspaceItem

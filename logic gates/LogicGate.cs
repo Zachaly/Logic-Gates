@@ -1,19 +1,23 @@
 ﻿using System.Collections.Generic;
-using System;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     public abstract class LogicGate
     {
         string _name = "";
-        abstract public bool Output { get; } // an output signal of this logic gates
-        protected List<LogicGate> Inputs; // gates connected with this one
-        public List<LogicGate> GetInputs { get { return Inputs; } } // returns inputs
-        public string Name { get { return _name; } } // returns friendly name of this logic gate
+        abstract public bool Output { get; } // An output signal of this logic gates
+        protected List<LogicGate> Inputs; // Gates connected with this one
+        public List<LogicGate> GetInputs // Returns inputs
+        {
+            get => Inputs;  
+        } 
+        public string Name // Returns friendly name of this logic gate
+        {
+            get => _name;
+        } 
         public List<LogicGate> Outputs { get; }
         public bool Cloned { get; set; } = false;
-
-        private LogicGate lastClone;
+        private LogicGate lastClone; // Last clone of this gate
 
         public LogicGate(string name)
         {
@@ -23,20 +27,20 @@ namespace Symulator_układów_logicznych
             Cloned = false;
         }
 
-        // adds given gate to inputs of this one
+        // Adds given gate to inputs of this one
         virtual public void ConnectWith(LogicGate gate)
         {
             gate.Outputs.Add(this);
         }
 
-        // removes gate from inputs
+        // Removes gate from inputs
         public virtual void Disconnect(LogicGate gate)
         {
             Inputs.Remove(gate);
             gate.Outputs.Remove(this);
         }
 
-        // Clone differs on logic gate type
+        // Clone differs on logic gate type, if this gate is already cloned return last clone
         public LogicGate Clone()
         {
             if (Cloned)

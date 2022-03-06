@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Represents an item in toolbox
     public partial class ToolBoxItem : UserControl
@@ -24,6 +24,7 @@ namespace Symulator_układów_logicznych
             }
             catch(System.ArgumentException _) { }
 
+            // If this item is for custom gate, adds ability to modify it or remove it
             if(Gate is CustomGate)
             {
                 MenuItem DeleteOption = new MenuItem() { Header = "_Delete" };
@@ -39,7 +40,6 @@ namespace Symulator_układów_logicznych
                 };
 
                 Label.ContextMenu = new ContextMenu();
-
                 Label.ContextMenu.Items.Add(DeleteOption);
                 Label.ContextMenu.Items.Add(ModifyOption);
             }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     public interface IWorkspaceItem
     {

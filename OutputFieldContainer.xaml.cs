@@ -3,8 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-
-namespace Symulator_układów_logicznych
+namespace LogicGates
 {
     // Output of the whole sheme
     public partial class OutputFieldContainer : UserControl, IWorkspaceItem
@@ -63,7 +62,5 @@ namespace Symulator_układów_logicznych
         {
 
         }
-
-
     }
 }
