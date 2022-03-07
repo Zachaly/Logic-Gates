@@ -1,0 +1,90 @@
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\AddCustomGate.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\GateContainer.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\InputFieldContainer.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\MainWindow.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\OutputFieldContainer.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\ToolBoxItem.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\VisualConnection.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\App.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych_MarkupCompile.cache
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych_MarkupCompile.lref
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Symulator układów logicznych.exe.config
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Symulator układów logicznych.exe
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Symulator układów logicznych.pdb
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.Abstractions.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.Extensions.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.Helpers.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.IOC.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.MVVM.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Haley.WPF.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Microsoft.Xaml.Behaviors.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\protobuf-net.Core.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\protobuf-net.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Buffers.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.CodeDom.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Collections.Immutable.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Drawing.Common.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Memory.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Numerics.Vectors.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.AccessControl.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Cryptography.Xml.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Permissions.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Principal.Windows.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Text.Encodings.Web.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Text.Json.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.ValueTuple.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Xceed.Wpf.AvalonDock.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\Microsoft.Xaml.Behaviors.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\protobuf-net.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\protobuf-net.Core.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Buffers.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.CodeDom.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Collections.Immutable.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Drawing.Common.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Memory.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Numerics.Vectors.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.AccessControl.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Cryptography.Xml.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Permissions.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Security.Principal.Windows.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Text.Encodings.Web.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Text.Json.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\System.ValueTuple.xml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\ja-JP\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\AddCustomGate.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\GateContainer.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\InputFieldContainer.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\MainWindow.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\OutputFieldContainer.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\ToolBoxItem.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\VisualConnection.baml
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.g.resources
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator_układów_logicznych.Properties.Resources.resources
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.csproj.GenerateResource.cache
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.csproj.CoreCompileInputs.cache
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.csproj.CopyComplete
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.exe
+D:\PROGRAMOWANIE\C#\projekty\Logic-Gates\obj\Debug\Symulator układów logicznych.pdb
